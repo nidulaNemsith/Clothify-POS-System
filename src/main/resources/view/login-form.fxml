@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="894.0" style="-fx-background-color: #111315;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="146.0" layoutY="68.0" prefHeight="455.0" prefWidth="603.0" style="-fx-background-color: #3D4142; -fx-background-radius: 30;">
+         <children>
+            <Label layoutX="230.0" layoutY="41.0" prefHeight="40.0" prefWidth="144.0" text="Login!" textFill="WHITE">
+               <font>
+                  <Font name="Cambria" size="48.0" />
+               </font>
+            </Label>
+            <Label layoutX="177.0" layoutY="109.0" text="Please enter your credentials below to continue" textFill="WHITE" />
+            <Label layoutX="111.0" layoutY="138.0" prefHeight="17.0" prefWidth="32.0" text="Email" textFill="WHITE" />
+            <TextField fx:id="txtEmail" focusTraversable="false" layoutX="111.0" layoutY="161.0" prefHeight="33.0" prefWidth="376.0" promptText="Enter your Email" style="-fx-background-color: #ecf0f1;" />
+            <Label layoutX="111.0" layoutY="202.0" prefHeight="17.0" prefWidth="54.0" text="Password" textFill="WHITE" />
+            <PasswordField fx:id="txtPassword" focusTraversable="false" layoutX="111.0" layoutY="228.0" prefHeight="33.0" prefWidth="376.0" promptText="Enter your password" />
+            <JFXButton fx:id="btnForgotPassword" focusTraversable="false" layoutX="376.0" layoutY="270.0" onAction="#btnForgotPasswordOnAction" prefHeight="25.0" prefWidth="116.0" text="Forgot Password?" textFill="#fac1d9" />
+            <JFXButton fx:id="btnLogin" layoutX="251.0" layoutY="312.0" onAction="#btnLoginOnAction" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #FAC1D9;" text="Login">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
