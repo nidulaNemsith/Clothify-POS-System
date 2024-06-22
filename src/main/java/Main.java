@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -15,8 +16,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/forgotPassword-form.fxml"))));
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/dashBoard-admin.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
