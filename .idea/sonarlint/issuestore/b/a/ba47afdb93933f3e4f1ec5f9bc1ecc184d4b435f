@@ -1,0 +1,64 @@
+
+–
+java:S1104"SMake btnExit a static final constant or non-public and provide accessors if needed.(şÁ©Ô8ô­ÿ„2J$32b1852f-e01d-42bc-b098-22055ca2cf63
+š
+java:S1104 "RMake btnAdd a static final constant or non-public and provide accessors if needed.(şÙâ€ûÿÿÿÿ8ö­ÿ„2J$8a837e4e-87ab-405b-8224-3a957ae5c504
+œ
+java:S1104!"TMake optStaff a static final constant or non-public and provide accessors if needed.(£ËËÿÿÿÿÿ8ö­ÿ„2J$4ffdb62f-4ae1-453d-afec-d506ff60fade
+—
+java:S1104""TMake txtStaff a static final constant or non-public and provide accessors if needed.(¥Àİ¡8ö­ÿ„2J$6a40a3b9-f420-43b0-b915-f87e6b707c12
+–
+java:S1104#"SMake txtName a static final constant or non-public and provide accessors if needed.(ºßÕû8ö­ÿ„2J$0f815b20-7b2d-477d-b913-73e477b57645
+
+java:S1104$"ZMake txtPhoneNumber a static final constant or non-public and provide accessors if needed.(ùÈøŸ8ö­ÿ„2J$ae4920d7-0eeb-4207-9497-d487a82613db
+
+java:S1104%"VMake txtAddress a static final constant or non-public and provide accessors if needed.(ºåıÿÿÿÿ8ö­ÿ„2J$79466d4b-c32f-48e3-9161-8200ca301a82
+œ
+java:S1104&"TMake txtEmail a static final constant or non-public and provide accessors if needed.(„Å«ıÿÿÿÿ8ö­ÿ„2J$62902d5e-e5f4-4f0b-aabf-d78768fa9710
+œ
+java:S1104'"TMake tblStaff a static final constant or non-public and provide accessors if needed.(ŒÉ­äıÿÿÿÿ8ö­ÿ„2J$532be017-e109-4d75-9e70-3a2ae57f515f
+
+java:S1104("VMake colStaffId a static final constant or non-public and provide accessors if needed.(ò¶ışúÿÿÿÿ8ö­ÿ„2J$894d8499-3d0f-463d-b755-e19fb44314c8
+
+java:S1104)"ZMake colPhoneNumber a static final constant or non-public and provide accessors if needed.(åâ·æ8ö­ÿ„2J$67f3ec39-18e2-4402-949b-8d509b79aaaa
+™
+java:S1104*"VMake colAddress a static final constant or non-public and provide accessors if needed.(¯ÿı°8ö­ÿ„2J$c7bee5e2-5a1b-453a-a922-793ed937179b
+˜
+java:S1104+"UMake btnUpdate a static final constant or non-public and provide accessors if needed.(§Å‰÷8ö­ÿ„2J$9f0580ab-3b12-43bd-bc8d-690a444fb6a8
+
+java:S1104,"UMake btnDelete a static final constant or non-public and provide accessors if needed.(¤ÍËüıÿÿÿÿ8ö­ÿ„2J$910b6a77-609e-4c40-82bd-5115f0717824
+›
+java:S1104-"SMake colName a static final constant or non-public and provide accessors if needed.(ÊÚÎ¨ùÿÿÿÿ8ö­ÿ„2J$a8a9a9b8-8e70-4396-8a88-1e3eea8d678f
+—
+java:S1104."TMake colEmail a static final constant or non-public and provide accessors if needed.(ƒäÆ8ö­ÿ„2J$18c2b103-468e-497c-986a-caa1e0ac8194
+–
+java:S1104/"SMake btnBack a static final constant or non-public and provide accessors if needed.(ÿòØ8ö­ÿ„2J$b42f6747-0c2c-4d0c-8aa2-87b134321538
+w
+java:S3740!"/Provide the parametrized type for this generic.(£ËËÿÿÿÿÿ8ö­ÿ„2J$f9c56a93-47df-47fc-b399-010c77332592
+w
+java:S3740'"/Provide the parametrized type for this generic.(ŒÉ­äıÿÿÿÿ8ö­ÿ„2J$1070275d-54a2-43f5-908e-effcb6d69b3d
+w
+java:S3740("/Provide the parametrized type for this generic.(ò¶ışúÿÿÿÿ8ö­ÿ„2J$6492228d-83e0-40d6-baae-68b07d78d1eb
+r
+java:S3740)"/Provide the parametrized type for this generic.(åâ·æ8ö­ÿ„2J$376cc4f3-53e2-4b44-a72e-ebc60a9229be
+r
+java:S3740*"/Provide the parametrized type for this generic.(¯ÿı°8ö­ÿ„2J$3bfa6bd3-e691-403d-97c7-ccbee806a93c
+w
+java:S3740-"/Provide the parametrized type for this generic.(ÊÚÎ¨ùÿÿÿÿ8ö­ÿ„2J$da352eff-b6ed-4afb-8f9b-cd27922a1711
+r
+java:S3740."/Provide the parametrized type for this generic.(ƒäÆ8ö­ÿ„2J$24b243f0-ef99-4714-8bc8-594f85e7237c
+u
+java:S1172<"2Remove this unused method parameter "actionEvent".(åØû¥8ş­ÿ„2J$0b9386be-6659-4127-909e-d42e371a4d07
+z
+java:S1172?"2Remove this unused method parameter "actionEvent".(»…ä«ùÿÿÿÿ8ÿ­ÿ„2J$fa719ebe-b640-4278-83dc-e2c872e049c6
+z
+java:S1172b"2Remove this unused method parameter "actionEvent".(ßÜ Éûÿÿÿÿ8ƒ‘­ÿ„2J$16c120fb-fb56-4ba4-99b2-b2ca60ebf56a
+r	java:S106d"+Replace this use of System.out by a logger.(‚é€Şûÿÿÿÿ8ÿ­ÿ„2J$3beec07d-d0dd-4a3f-927e-ff698d29713a
+w
+java:S1172m"/Remove this unused method parameter "keyEvent".(ÛŞ—£şÿÿÿÿ8²×Óÿ„2J$8b0b0255-9d0e-46df-8ab5-d30d1a9fdfb1
+u
+java:S1172"2Remove this unused method parameter "actionEvent".(Œ“‘8…‘­ÿ„2J$c36a1004-3242-4c8f-9303-d964d152b6a5
+{
+java:S1172ˆ"2Remove this unused method parameter "actionEvent".(¿˜å•øÿÿÿÿ8»–²ÿ„2J$f2a75fba-7b99-467d-ae23-675fb7afa056
+R
+java:S1128"5Remove this unused import 'org.example.dto.Supplier'.(Í¬¿›8ŒÛì€…2

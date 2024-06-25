@@ -1,0 +1,86 @@
+
+
+java:S1104"SMake btnExit a static final constant or non-public and provide accessors if needed.(þÁ©ÔJ$799c6630-ffc7-4fba-b8a9-e13b754da55e
+“
+java:S1104"RMake btnAdd a static final constant or non-public and provide accessors if needed.(þÙâ€ûÿÿÿÿJ$6a0e8d34-3002-4574-a13b-3cf85a989b04
+’
+java:S1104"VMake optProduct a static final constant or non-public and provide accessors if needed.(§Ñ¿¥J$1df21baa-cbd5-41ce-b24f-47764ed3683e
+’
+java:S1104"VMake txtProduct a static final constant or non-public and provide accessors if needed.(¯íìJ$6d7691ec-c785-4cd8-b2c4-a05b0e746aef
+Ž
+java:S1104"RMake txtQty a static final constant or non-public and provide accessors if needed.(ÅÈŽJ$429beb03-f8d1-48a9-bf64-0e46293cb5d8
+
+java:S1104"TMake txtPrice a static final constant or non-public and provide accessors if needed.(‰ç¼¤J$085e198c-31fb-4d99-902c-7d5c23dd3067
+—
+java:S1104"VMake tblProduct a static final constant or non-public and provide accessors if needed.(¯©ž„úÿÿÿÿJ$6c5866aa-fe73-4fb4-8cce-378830cedd49
+›
+java:S1104 "ZMake txtProductName a static final constant or non-public and provide accessors if needed.(Òµö“üÿÿÿÿJ$61a7c89b-56f7-4699-be06-d81f95c6abc6
+™
+java:S1104!"XMake colProductId a static final constant or non-public and provide accessors if needed.(º°ÇþûÿÿÿÿJ$a3c267f1-6f61-4160-a1a0-11135de4907e
+–
+java:S1104""ZMake colProductName a static final constant or non-public and provide accessors if needed.(¾úŽ€J$d4041173-e043-461a-9fb0-efcc000572a6
+˜
+java:S1104#"WMake colCategory a static final constant or non-public and provide accessors if needed.(·§ÝñüÿÿÿÿJ$ccf2590a-04b7-4357-a55f-e846cdc4dabb
+
+java:S1104$"SMake colSize a static final constant or non-public and provide accessors if needed.(«–ÊJ$b0511e29-3eab-4262-80e2-5834cdc0142f
+“
+java:S1104%"RMake colQty a static final constant or non-public and provide accessors if needed.(‰å¾…úÿÿÿÿJ$4afc9a40-ef9f-4017-9a23-d9b3202d348f
+•
+java:S1104&"YMake colSupplierId a static final constant or non-public and provide accessors if needed.(Ÿœ¼‘J$2b61c615-a0ed-482d-b4df-0471522ca15a
+
+java:S1104'"TMake colPrice a static final constant or non-public and provide accessors if needed.(Æ¦ŒêJ$adb151b5-4263-4c0f-93a5-da436288362b
+‘
+java:S1104("UMake btnUpdate a static final constant or non-public and provide accessors if needed.(§Å‰÷J$56d6c368-43d9-4390-97d4-c910b0bd1935
+–
+java:S1104)"UMake btnDelete a static final constant or non-public and provide accessors if needed.(¤ÍËüýÿÿÿÿJ$9519514a-4d71-4e96-aad7-dfd6bcde6e47
+”
+java:S1104*"SMake optSize a static final constant or non-public and provide accessors if needed.(ØõÐéþÿÿÿÿJ$3a2986d7-3146-434b-bc19-2046b19c450b
+“
+java:S1104+"WMake optCategory a static final constant or non-public and provide accessors if needed.(ŠòÖ´J$3be73757-026b-490f-a722-3af034d34e24
+•
+java:S1104,"YMake txtSupplierId a static final constant or non-public and provide accessors if needed.(ßšÜ J$480a7ed2-2319-4943-bce6-c58464b0e160
+”
+java:S1104-"SMake backBtn a static final constant or non-public and provide accessors if needed.(±ÁÞ’ûÿÿÿÿJ$5ef7bb47-a410-47c3-b6e6-38db0aad28bb
+k
+java:S3740"/Provide the parametrized type for this generic.(§Ñ¿¥J$1a81939c-ebc7-4d34-8733-d122da5b08ad
+p
+java:S3740"/Provide the parametrized type for this generic.(¯©ž„úÿÿÿÿJ$21e89f6d-b16e-4cea-b5b5-ad1b535edd9a
+p
+java:S3740!"/Provide the parametrized type for this generic.(º°ÇþûÿÿÿÿJ$6c0f84f5-f5d4-400a-992f-4086b217165a
+k
+java:S3740""/Provide the parametrized type for this generic.(¾úŽ€J$3f8a5d6e-9038-4c0e-b743-a4b0f555adbe
+p
+java:S3740#"/Provide the parametrized type for this generic.(·§ÝñüÿÿÿÿJ$7c2230b2-005c-4c05-a1f1-bccd5d030b7b
+k
+java:S3740$"/Provide the parametrized type for this generic.(«–ÊJ$79880bb5-2687-43fc-a453-a625c93b4119
+p
+java:S3740%"/Provide the parametrized type for this generic.(‰å¾…úÿÿÿÿJ$5b4bb8ad-291d-476e-8ff1-2195e2639927
+k
+java:S3740&"/Provide the parametrized type for this generic.(Ÿœ¼‘J$fdde40f4-428f-4b21-9d8a-eaa190e1429d
+k
+java:S3740'"/Provide the parametrized type for this generic.(Æ¦ŒêJ$827f2d8d-9a35-4ad1-a2a8-0ac3902febf8
+p
+java:S3740*"/Provide the parametrized type for this generic.(ØõÐéþÿÿÿÿJ$70925b54-55ff-4eb6-8edc-2d4418068e61
+k
+java:S3740+"/Provide the parametrized type for this generic.(ŠòÖ´J$6340d28b-a08d-4a46-8c00-5a85f5633e0b
+Â
+java:S1186/"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(½ƒˆÛüÿÿÿÿJ$e521af95-f41e-4d0a-a479-e317c4623026
+Â
+java:S11862"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‚ÜÏ¿øÿÿÿÿJ$177e9c99-d619-47ab-9222-8dadb0721b8d
+½
+java:S11865"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(žŒ“‘J$02338278-1ece-4c26-83e4-e9d0a9c9a4d3
+Â
+java:S11868"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¿˜å•øÿÿÿÿJ$916c2006-3ce2-45a3-b656-2b2312088357
+Â
+java:S1186;"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(à„¯âûÿÿÿÿJ$56179034-d2cf-40ee-89c2-43a98c592969
+Â
+java:S1186N"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(»…ä«ùÿÿÿÿJ$833562f3-26d8-403c-aa60-a899a978102f
+Å
+java:S1186œ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ØÈžà8â€…2J$6edc7cae-077c-48f5-8280-0d5dceeb9232
+Å
+java:S1186Ÿ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(®ºÑ¾8â€…2J$b40418da-b683-46c1-83f1-8c0f21679c38
+s
+java:S1172>"2Remove this unused method parameter "actionEvent".(®ÿÊ™ûÿÿÿÿJ$4bb67b0e-2411-4cd3-a097-a96e86d059fb
+k	java:S106@"+Replace this use of System.out by a logger.(‚é€ÞûÿÿÿÿJ$62d7dbe3-e3c3-4e3c-99e6-cd66b9c2cc0b
+n
+java:S1172J"2Remove this unused method parameter "actionEvent".(åØû¥J$bfcc9d37-301e-42d8-a7c1-cb4487c76696

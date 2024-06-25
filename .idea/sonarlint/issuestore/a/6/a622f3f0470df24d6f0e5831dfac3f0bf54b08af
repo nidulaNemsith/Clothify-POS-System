@@ -1,0 +1,29 @@
+
+w
+java:S3740"/Provide the parametrized type for this generic.(ÿ‚ÇØùÿÿÿÿ8š²Óş„2J$880a7b2c-ffde-41ca-a8c4-05ab5e43602f
+r
+java:S3740*"/Provide the parametrized type for this generic.(êÑÓ‘8š²Óş„2J$ef4ed514-9139-4b96-bae5-64dec44251af
+r
+java:S3740Q"/Provide the parametrized type for this generic.(¿½ˆ–8ª¬×ş„2J$a9823347-706c-4890-857b-dbc9379eb9aa
+r
+java:S3740]"/Provide the parametrized type for this generic.(Ø·ä8µ×Øş„2J$fb5f8bff-92dc-4b67-97d7-918d72eeb65b
+{
+java:S1874"3Remove this use of "createQuery"; it is deprecated.(ÿ‚ÇØùÿÿÿÿ8²Óş„2J$64994233-378e-47df-9487-868fe7492457
+v
+java:S1874*"3Remove this use of "createQuery"; it is deprecated.(êÑÓ‘8Ÿ²Óş„2J$244c955d-c604-43a6-b004-5d8c1b7a59ed
+v
+java:S1874B"3Remove this use of "createQuery"; it is deprecated.(Ş´ÊÄ8¡²Óş„2J$15e55939-d41c-43f6-810a-4fc265289166
+t
+java:S1602G",Remove useless curly braces around statement(›Äıÿÿÿÿ8‡ÈÖş„2J$1c7ff6e3-eff5-458d-9c34-37ae2d5b54f6
+ˆ
+java:S1612G"@Replace this lambda with method reference 'userEntityList::add'.(›Äıÿÿÿÿ8‡ÈÖş„2J$7334877f-462e-4e0b-87c5-000bbb47690b
+v
+java:S1874Q"3Remove this use of "createQuery"; it is deprecated.(¿½ˆ–8±¬×ş„2J$c26a43a0-6bd4-4fc4-9015-78aca60201fe
+v
+java:S1874]"3Remove this use of "createQuery"; it is deprecated.(Ø·ä8¾×Øş„2J$6c43abd7-0593-4d33-a8fe-e4c153f51500
+‚
+java:S1128"?Remove this unused import 'org.example.dao.custom.CustomerDao'.(û€İ¯8ñã×ş„2J$d27e0006-3dcf-40cf-b131-6e5582e90610
+†
+java:S1128">Remove this unused import 'org.example.entity.CustomerEntity'.(á™„ıÿÿÿÿ8ñã×ş„2J$5c0da274-142b-46fa-ac63-6279a382fe4c
+†
+java:S1128">Remove this unused import 'org.example.entity.SupplierEntity'.(ƒòÅüÿÿÿÿ8ñã×ş„2J$80f3e1a8-f629-41a1-932d-78399976ef61

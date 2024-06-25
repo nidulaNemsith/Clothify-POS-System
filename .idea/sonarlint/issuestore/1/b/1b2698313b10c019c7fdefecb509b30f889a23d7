@@ -1,0 +1,22 @@
+
+o
+java:S1104"TMake txtEmail a static final constant or non-public and provide accessors if needed.(„Å«ıÿÿÿÿ
+q
+java:S1104	"VMake btnSendOtp a static final constant or non-public and provide accessors if needed.(Ä´¼Æÿÿÿÿÿ
+u
+java:S1104
+"ZMake txtNewPassword a static final constant or non-public and provide accessors if needed.(´Ë·ªüÿÿÿÿ
+l
+java:S1104"VMake txtOtpCode a static final constant or non-public and provide accessors if needed.(Ï‡ìë
+y
+java:S1104"^Make txtReEnterPassword a static final constant or non-public and provide accessors if needed.(’ìôûÿÿÿÿ
+j
+java:S1104"TMake btnReset a static final constant or non-public and provide accessors if needed.(ÚÛ
+i
+java:S1104"SMake btnExit a static final constant or non-public and provide accessors if needed.(şÁ©Ô
+—
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(…²Âä
+œ
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Øê–Áøÿÿÿÿ
+H
+java:S1172"2Remove this unused method parameter "actionEvent".(åØû¥
