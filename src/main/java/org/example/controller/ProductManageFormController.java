@@ -152,4 +152,10 @@ public class ProductManageFormController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void txtQtykeyReleased(KeyEvent keyEvent) {
+    }
+
+    public void txtPriceKeyReleased(KeyEvent keyEvent) {
+    }
 }

@@ -1,14 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.PlaceOrderForm"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="btnBack" prefHeight="677.0" prefWidth="991.0" style="-fx-background-color: #111315;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.PlaceOrderFormController">
+   <children>
+      <Label layoutX="299.0" layoutY="30.0" prefHeight="60.0" prefWidth="394.0" text="ORDER MANAGEMENT" textFill="#fac1d9">
+         <font>
+            <Font name="Candara Bold" size="40.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnExit" focusTraversable="false" layoutX="926.0" layoutY="14.0" onAction="#btnExitOnAction" prefHeight="30.0" prefWidth="47.0" style="-fx-background-color: #111315;" text="X" textFill="#e81717">
+         <font>
+            <Font name="Comic Sans MS Bold" size="22.0" />
+         </font>
+         <effect>
+            <Reflection />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnAdd" focusTraversable="false" layoutX="27.0" layoutY="610.0" onAction="#btnAddOnAction" prefHeight="46.0" prefWidth="120.0" style="-fx-background-color: #FAC1D9;" text="Place">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow level="0.4" />
+         </effect>
+      </JFXButton>
+      <JFXComboBox fx:id="optOrder" focusColor="#4d4d4d" layoutX="31.0" layoutY="110.0" onAction="#optOrderOnAction" prefHeight="38.0" prefWidth="246.0" promptText="Select Option" style="-fx-background-color: #BDC3C7;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXComboBox>
+      <TextField fx:id="txtOrder" editable="false" focusTraversable="false" layoutX="31.0" layoutY="182.0" onKeyReleased="#txtOrderIdOnReleased" prefHeight="38.0" prefWidth="246.0" promptText="Product ID" style="-fx-background-color: #777979;" />
+      <Label layoutX="29.0" layoutY="158.0" prefHeight="24.0" prefWidth="80.0" text="Order ID" textFill="#fffefe">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="220.0" prefHeight="24.0" prefWidth="97.0" text="Product Name" textFill="#fffefe">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="344.0" prefHeight="24.0" prefWidth="38.0" text="Size" textFill="#fffefe">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="406.0" prefHeight="24.0" prefWidth="38.0" text="Qty" textFill="#fffefe">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="468.0" prefHeight="24.0" prefWidth="61.0" text="Price" textFill="#fffefe">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtOrderName" focusTraversable="false" layoutX="31.0" layoutY="244.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Product Name" style="-fx-background-color: #777979;" />
+      <TextField fx:id="txtQty" focusTraversable="false" layoutX="31.0" layoutY="430.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Qty" style="-fx-background-color: #777979;" />
+      <TextField fx:id="txtPrice" focusTraversable="false" layoutX="31.0" layoutY="492.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Price" style="-fx-background-color: #777979;" />
+      <Separator layoutX="295.0" layoutY="110.0" orientation="VERTICAL" prefHeight="546.0" prefWidth="6.0" />
+      <TableView fx:id="tblOrder" fixedCellSize="0.0" layoutX="308.0" layoutY="110.0" prefHeight="485.0" prefWidth="673.0">
+         <columns>
+            <TableColumn fx:id="colProductId" prefWidth="101.0" text="Order ID" />
+            <TableColumn fx:id="colProductName" prefWidth="106.0" text="Product Name" />
+            <TableColumn fx:id="colCategory" prefWidth="98.0" text="Category" />
+            <TableColumn fx:id="colSize" minWidth="0.0" prefWidth="79.0" text="Size" />
+            <TableColumn fx:id="colQty" minWidth="0.0" prefWidth="76.0" text="Qty" />
+            <TableColumn fx:id="colPrice" maxWidth="185.0" minWidth="-1.0" prefWidth="102.0" text="Price" />
+            <TableColumn fx:id="colStaffId" minWidth="-1.0" prefWidth="110.0" text="Staff ID" />
+         </columns>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TableView>
+      <JFXButton fx:id="btnUpdate" focusTraversable="false" layoutX="27.0" layoutY="610.0" onAction="#btnUpdateOnAction" prefHeight="46.0" prefWidth="120.0" style="-fx-background-color: #FAC1D9;" text="Update" visible="false">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow level="0.4" />
+         </effect>
+      </JFXButton>
+      <JFXButton fx:id="btnDelete" focusTraversable="false" layoutX="27.0" layoutY="610.0" onAction="#btnDeleteOnAction" prefHeight="46.0" prefWidth="120.0" style="-fx-background-color: #FAC1D9;" text="Delete" visible="false">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow level="0.4" />
+         </effect>
+      </JFXButton>
+      <JFXComboBox fx:id="optSize" focusColor="#4d4d4d" layoutX="31.0" layoutY="368.0" onAction="#optSizeOnAction" prefHeight="38.0" prefWidth="246.0" promptText="Select Option" style="-fx-background-color: #BDC3C7;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXComboBox>
+      <JFXComboBox fx:id="optCategory" focusColor="#4d4d4d" layoutX="31.0" layoutY="306.0" onAction="#optCategoryOnAction" prefHeight="38.0" prefWidth="246.0" promptText="Select Option" style="-fx-background-color: #BDC3C7;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXComboBox>
+      <Label layoutX="31.0" layoutY="282.0" prefHeight="24.0" prefWidth="61.0" text="Category" textFill="#fffefe">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtStaffId" focusTraversable="false" layoutX="31.0" layoutY="554.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Supplier ID" style="-fx-background-color: #777979;" />
+      <Label layoutX="31.0" layoutY="530.0" prefHeight="24.0" prefWidth="71.0" text="Staff ID" textFill="#fffefe">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="backBtn" focusTraversable="false" layoutX="20.0" layoutY="28.0" onAction="#btnBackOnAction" prefHeight="46.0" prefWidth="47.0" style="-fx-background-color: #111315;" text="&lt;" textFill="#fac1d9">
+         <font>
+            <Font name="Arial Black" size="30.0" />
+         </font>
+         <effect>
+            <Reflection />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
 </AnchorPane>

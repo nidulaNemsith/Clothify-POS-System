@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Reflection?>
@@ -16,7 +17,7 @@
             <Font name="Candara Bold" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="lblTime" layoutX="738.0" layoutY="74.0" prefHeight="47.0" prefWidth="76.0" text="23:00" textFill="#fac1d9">
+      <Label fx:id="lblTime" layoutX="661.0" layoutY="74.0" prefHeight="47.0" prefWidth="143.0" text="00:00:00" textFill="#fac1d9">
          <font>
             <Font name="Calibri Bold" size="30.0" />
          </font>
@@ -107,5 +108,6 @@
             <Glow level="0.4" />
          </effect>
       </JFXButton>
+      <Separator layoutX="814.0" layoutY="84.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="0.0" />
    </children>
 </AnchorPane>

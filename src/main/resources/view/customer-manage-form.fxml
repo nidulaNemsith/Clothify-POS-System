@@ -47,7 +47,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXComboBox>
-      <TextField fx:id="txtCustomer" editable="false" focusTraversable="false" layoutX="31.0" layoutY="196.0" onKeyReleased="#txtCustomerIdOnReleased" prefHeight="38.0" prefWidth="246.0" promptText="Customer ID" style="-fx-background-color: #777979;" />
+      <TextField fx:id="txtCustomer" editable="false" focusTraversable="false" layoutX="31.0" layoutY="196.0" onKeyReleased="#txtCustomerIdOnReleased" prefHeight="38.0" prefWidth="246.0" promptText="Customer ID" style="-fx-background-color: #777979;">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
       <Label layoutX="32.0" layoutY="165.0" prefHeight="24.0" prefWidth="80.0" text="Customer ID" textFill="#fffefe">
          <font>
             <Font size="14.0" />
@@ -73,22 +76,23 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtName" focusTraversable="false" layoutX="31.0" layoutY="273.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Name" style="-fx-background-color: #777979;" />
-      <TextField fx:id="txtPhoneNumber" focusTraversable="false" layoutX="31.0" layoutY="349.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Phone NUmber" style="-fx-background-color: #777979;" />
-      <TextField fx:id="txtEmail" focusTraversable="false" layoutX="31.0" layoutY="423.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter your Email" style="-fx-background-color: #777979;" />
-      <TextField fx:id="txtAddress" focusTraversable="false" layoutX="31.0" layoutY="499.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Address" style="-fx-background-color: #777979;" />
+      <TextField fx:id="txtName" focusTraversable="false" layoutX="31.0" layoutY="273.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Name" style="-fx-background-color: #777979;">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
+      <TextField fx:id="txtPhoneNumber" focusTraversable="false" layoutX="31.0" layoutY="349.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Phone NUmber" style="-fx-background-color: #777979;">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
+      <TextField fx:id="txtEmail" focusTraversable="false" layoutX="31.0" layoutY="423.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter your Email" style="-fx-background-color: #777979;">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
+      <TextField fx:id="txtAddress" focusTraversable="false" layoutX="31.0" layoutY="499.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Address" style="-fx-background-color: #777979;">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
       <Separator layoutX="295.0" layoutY="110.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="0.0" />
-      <TableView fx:id="tblCustomer" fixedCellSize="0.0" layoutX="308.0" layoutY="110.0" prefHeight="516.0" prefWidth="657.0">
-         <columns>
-            <TableColumn fx:id="colCustomerId" prefWidth="95.0" text="Customer ID" />
-            <TableColumn fx:id="colName" prefWidth="129.0" text="Name" />
-            <TableColumn fx:id="colPhoneNumber" prefWidth="134.0" text="Phone Number" />
-            <TableColumn fx:id="colEmail" prefWidth="153.0" text="Email" />
-            <TableColumn fx:id="colAddress" prefWidth="145.0" text="Address" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-         </columns>
-      </TableView>
       <JFXButton fx:id="btnUpdate" focusTraversable="false" layoutX="27.0" layoutY="574.0" onAction="#btnUpdateOnAction" prefHeight="46.0" prefWidth="120.0" style="-fx-background-color: #FAC1D9;" text="Update" visible="false">
          <font>
             <Font name="Cambria Bold" size="24.0" />
@@ -122,5 +126,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <TableView fx:id="tblCustomer" layoutX="309.0" layoutY="110.0" prefHeight="516.0" prefWidth="655.0">
+        <columns>
+          <TableColumn fx:id="colCustId" prefWidth="104.0" text="Customer ID" />
+          <TableColumn fx:id="colName" prefWidth="117.0" text="Name" />
+            <TableColumn fx:id="colPhoneNumber" prefWidth="122.0" text="Phone Number" />
+            <TableColumn fx:id="colEmail" prefWidth="162.0" text="Email" />
+            <TableColumn fx:id="colAddress" prefWidth="149.0" text="Address" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

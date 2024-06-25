@@ -10,11 +10,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.example.bo.BoFactory;
+import org.example.bo.custom.impl.UserBoImpl;
+import org.example.dto.Supplier;
+import org.example.dto.User;
+import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,11 +46,54 @@ public class StaffManageFormController implements Initializable {
     public TableColumn colEmail;
     public JFXButton btnBack;
 
+    UserBoImpl userBo= BoFactory.getInstance().getBo(BoType.USER);
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colStaffId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        tblStaff.setItems(userBo.getAll());
+        setComboBoxValues();
+    }
     public void btnExitOnAction(ActionEvent actionEvent) {
         System.exit(0);
     }
     public void btnAddOnAction(ActionEvent actionEvent) {
-        System.out.println("Add");
+        if (isTextFieldEmpty()){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Empty Field");
+            alert.setContentText("Fill the empty fields");
+            alert.showAndWait();
+        }else{
+            User user=new User(
+                    txtStaff.getText(),
+                    txtName.getText(),
+                    txtEmail.getText(),
+                    txtPhoneNumber.getText(),
+                    "0000",
+                    "Staff",
+                    txtAddress.getText()
+            );
+            boolean isAdd=userBo.save(user);
+            Alert alert;
+            if(isAdd){
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("ADDED");
+                alert.setContentText("Staff Member Added Successfully!");
+                alert.showAndWait();
+                formClear();
+                txtStaff.setText(userBo.generateId());
+            }else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText("User not Added!");
+                alert.showAndWait();
+            }
+            tblStaff.setItems(userBo.getAll());
+        }
+
     }
     public void optStaffOnAction(ActionEvent actionEvent) {
         Object value = optStaff.getValue();
@@ -57,17 +107,66 @@ public class StaffManageFormController implements Initializable {
         }
     }
     public void txtStaffIdOnReleased(KeyEvent keyEvent) {
+        try {
+            User getUser = userBo.getUser(txtStaff.getText());
+            txtAddress.setText(getUser.getAddress());
+            txtEmail.setText(getUser.getEmail());
+            txtName.setText(getUser.getName());
+            txtPhoneNumber.setText(getUser.getPhoneNumber());
+            btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
+        } catch (Exception e) {
+            txtName.setText(null);
+            txtPhoneNumber.setText(null);
+            txtEmail.setText(null);
+            txtAddress.setText(null);
+            btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
+        }
     }
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        System.out.println("Delete");
+        userBo.delete(txtStaff.getText());
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("DELETED");
+        alert.setContentText("Staff Member Deleted Successfully!!");
+        alert.showAndWait();
+        formClear();
+        tblStaff.setItems(userBo.getAll());
     }
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-        System.out.println("Update");
+        if (isTextFieldEmpty()){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Empty Field");
+            alert.setContentText("Fill the empty fields");
+            alert.showAndWait();
+        }else{
+            User user=new User(
+                    txtStaff.getText(),
+                    txtName.getText(),
+                    txtEmail.getText(),
+                    txtPhoneNumber.getText(),
+                    "0000",
+                    "Staff",
+                    txtAddress.getText()
+            );
+            boolean isUpdate=userBo.update(user);
+            Alert alert;
+            if(isUpdate){
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("UPDATED");
+                alert.setContentText("Staff Updated Successfully!");
+                alert.showAndWait();
+                formClear();
+            }else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText("Staff not Updated!");
+                alert.showAndWait();
+            }
+            tblStaff.setItems(userBo.getAll());
+        }
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        setComboBoxValues();
-    }
+
     private void setComboBoxValues(){
         ObservableList<String>option= FXCollections.observableArrayList("Add Staff","Update Staff","Delete Staff");
         optStaff.setItems(option);
@@ -76,21 +175,33 @@ public class StaffManageFormController implements Initializable {
         btnDelete.setVisible(false);
         btnUpdate.setVisible(false);
         btnAdd.setVisible(true);
-        formClear();
+        btnAdd.setDisable(false);
         txtStaff.setEditable(false);
+        formClear();
+        txtStaff.setText(userBo.generateId());
+        txtAddress.setEditable(true);
+        txtName.setEditable(true);
+        txtPhoneNumber.setEditable(true);
+        txtEmail.setEditable(true);
     }
     private void optUpdate(){
         btnDelete.setVisible(false);
         btnAdd.setVisible(false);
         btnUpdate.setVisible(true);
         formClear();
+        txtStaff.setText(null);
         txtStaff.setEditable(true);
+        txtAddress.setEditable(true);
+        txtName.setEditable(true);
+        txtPhoneNumber.setEditable(true);
+        txtEmail.setEditable(true);
     }
     private void optDelete(){
         btnUpdate.setVisible(false);
         btnAdd.setVisible(false);
         btnDelete.setVisible(true);
         formClear();
+        txtStaff.setText(null);
         txtStaff.setEditable(true);
         txtAddress.setEditable(false);
         txtName.setEditable(false);
@@ -98,11 +209,14 @@ public class StaffManageFormController implements Initializable {
         txtEmail.setEditable(false);
     }
     private void formClear(){
-        txtStaff.clear();
-        txtAddress.clear();
-        txtName.clear();
-        txtPhoneNumber.clear();
-        txtEmail.clear();
+        txtStaff.setText(null);
+        txtAddress.setText(null);
+        txtName.setText(null);
+        txtPhoneNumber.setText(null);
+        txtEmail.setText(null);
+    }
+    private boolean isTextFieldEmpty(){
+        return txtAddress.getText().isEmpty() || txtName.getText().isEmpty() || txtPhoneNumber.getText().isEmpty() || txtEmail.getText().isEmpty();
     }
 
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
