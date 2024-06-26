@@ -1,31 +1,0 @@
-
-
-java:S1104"SMake btnExit a static final constant or non-public and provide accessors if needed.(şÁ©ÔJ$c07d1f2b-63fa-4869-af52-1bcebe55c15b
-•
-java:S1104"TMake btnStaff a static final constant or non-public and provide accessors if needed.(ŞªÈüÿÿÿÿJ$a94529e2-21b1-401e-af4c-43539067257e
-’
-java:S1104"VMake btnProduct a static final constant or non-public and provide accessors if needed.(º½èíJ$da828e3c-ac5a-4aa4-9a37-46adb6d755f2
-•
-java:S1104"TMake btnOrder a static final constant or non-public and provide accessors if needed.(ÚÛ¶˜ıÿÿÿÿJ$6246dfed-3baa-4755-8d79-bf4384ed119c
-™
-java:S1104 "XMake btnSuppliers a static final constant or non-public and provide accessors if needed.(‘ÙÒ¤øÿÿÿÿJ$654cec0e-17fb-4cf1-be49-b069b9b2c7a2
-–
-java:S1104!"UMake btnReport a static final constant or non-public and provide accessors if needed.(­íì¯ùÿÿÿÿJ$697c1bf5-ad81-4e7b-9c6c-c11ee3a35e92
-‘
-java:S1104""UMake btnLogOut a static final constant or non-public and provide accessors if needed.(ÛçÉÅJ$6117911c-f8ff-4200-964a-8868a993a6d4
-
-java:S1104#"SMake lblTime a static final constant or non-public and provide accessors if needed.(¿°×•J$ed4335d1-77df-464a-a8b8-0a9701aaa52d
-”
-java:S1104$"SMake lblDate a static final constant or non-public and provide accessors if needed.(…“À„ÿÿÿÿÿJ$dc6dff04-f169-4907-aee1-e1b8dc84ff29
-”
-java:S1104%"SMake lblName a static final constant or non-public and provide accessors if needed.(½Ï®·ıÿÿÿÿJ$e9f15c67-09e1-463f-b88d-8736d1ebd548
-˜
-java:S1104&"WMake btnCustomer a static final constant or non-public and provide accessors if needed.(·œÅüüÿÿÿÿJ$2d6f2391-1b9d-4cbf-9fb2-a7a1966fbeb0
-½
-java:S1186("€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ù³¶­J$eeb2c717-91fb-4852-aee7-ff307e5ede4a
-Â
-java:S1186+"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•Ğ‡üÿÿÿÿJ$54069762-05f7-4e72-a03d-1852417236f4
-n
-java:S1172O"2Remove this unused method parameter "actionEvent".(åØû¥J$6660e849-061f-4d97-aa54-d11c16b31342
-u
-java:S1128"2Remove this unused import 'java.util.EventObject'.(‘Å¹â8¥È˜¢„2J$b7d15f60-da7b-4697-a84c-314a4e4c4681
