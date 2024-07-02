@@ -43,4 +43,8 @@ public class CustomerBoImpl implements CustomerBo{
     public boolean update(Customer customer){
         return customerDao.update(new ObjectMapper().convertValue(customer, CustomerEntity.class));
     }
+    public ObservableList<String> getCustomerId(){
+        ObservableList<String> list=customerDao.gettAllId();
+        return list;
+    }
 }

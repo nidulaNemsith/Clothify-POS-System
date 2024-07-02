@@ -90,4 +90,15 @@ public class SupplierDaoImpl implements SupplierDao {
         Query query = session.createQuery("SELECT id FROM supplier ORDER BY id DESC LIMIT 1");
         return (String) query.uniqueResult();
     }
+    public ObservableList<String>gettAllId(){
+        Session session=HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List <String> list = session.createQuery("SELECT id FROM supplier").list();
+        session.close();
+        ObservableList<String> idList=FXCollections.observableArrayList();
+        list.forEach(s -> {
+            idList.add(s);
+        });
+        return idList;
+    }
 }

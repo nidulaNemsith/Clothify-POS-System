@@ -42,4 +42,8 @@ public class SupplierBoImpl implements SupplierBo {
     public boolean update(Supplier supplier){
         return supplierDao.update(new ObjectMapper().convertValue(supplier, SupplierEntity.class));
     }
+    public ObservableList<String> getSupplierId(){
+         ObservableList<String> list=supplierDao.gettAllId();
+         return list;
+    }
 }

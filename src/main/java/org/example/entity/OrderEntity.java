@@ -18,8 +18,8 @@ public class OrderEntity {
     @Id
     private String orderId;
     private String custID;
-    private String item;
     private int qty;
     private double total;
+    private String staffId;
 
 }

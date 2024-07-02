@@ -31,7 +31,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnAdd" focusTraversable="false" layoutX="27.0" layoutY="574.0" onAction="#btnAddOnAction" prefHeight="46.0" prefWidth="120.0" style="-fx-background-color: #FAC1D9;" text="Add">
+      <JFXButton fx:id="btnAdd" focusTraversable="false" layoutX="27.0" layoutY="574.0" onAction="#btnAddOnAction" prefHeight="46.0" prefWidth="120.0" style="-fx-background-color: #FAC1D9;" text="Add" visible="false">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -47,10 +47,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXComboBox>
-      <TextField fx:id="txtSupplier" editable="false" focusTraversable="false" layoutX="31.0" layoutY="196.0" onKeyReleased="#txtSupplierIdOnReleased" prefHeight="38.0" prefWidth="246.0" promptText="Supplier ID" style="-fx-background-color: #777979; -fx-font-color: white;">
-         <font>
-            <Font name="Arial Black" size="14.0" />
-         </font></TextField>
+      <TextField fx:id="txtSupplier" editable="false" focusTraversable="false" layoutX="31.0" layoutY="196.0" onKeyReleased="#txtSupplierIdOnReleased" prefHeight="38.0" prefWidth="246.0" promptText="Supplier ID" style="-fx-background-color: #777979; -fx-font-color: white;" />
       <Label layoutX="32.0" layoutY="165.0" prefHeight="24.0" prefWidth="80.0" text="Supplier ID" textFill="#fffefe">
          <font>
             <Font size="14.0" />
@@ -76,22 +73,10 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtName" focusTraversable="false" layoutX="31.0" layoutY="273.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Name" style="-fx-background-color: #777979;">
-         <font>
-            <Font name="Arial Black" size="14.0" />
-         </font></TextField>
-      <TextField fx:id="txtPhoneNumber" focusTraversable="false" layoutX="31.0" layoutY="349.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Phone Number" style="-fx-background-color: #777979;">
-         <font>
-            <Font name="Arial Black" size="14.0" />
-         </font></TextField>
-      <TextField fx:id="txtEmail" focusTraversable="false" layoutX="31.0" layoutY="423.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter your Email" style="-fx-background-color: #777979;">
-         <font>
-            <Font name="Arial Black" size="14.0" />
-         </font></TextField>
-      <TextField fx:id="txtAddress" focusTraversable="false" layoutX="31.0" layoutY="499.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Address" style="-fx-background-color: #777979;">
-         <font>
-            <Font name="Arial Black" size="14.0" />
-         </font></TextField>
+      <TextField fx:id="txtName" focusTraversable="false" layoutX="31.0" layoutY="273.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Name" style="-fx-background-color: #777979;" />
+      <TextField fx:id="txtPhoneNumber" focusTraversable="false" layoutX="31.0" layoutY="349.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Phone Number" style="-fx-background-color: #777979;" />
+      <TextField fx:id="txtEmail" focusTraversable="false" layoutX="31.0" layoutY="423.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter your Email" style="-fx-background-color: #777979;" />
+      <TextField fx:id="txtAddress" focusTraversable="false" layoutX="31.0" layoutY="499.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Address" style="-fx-background-color: #777979;" />
       <Separator layoutX="295.0" layoutY="110.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="0.0" />
       <JFXButton fx:id="btnUpdate" focusTraversable="false" layoutX="27.0" layoutY="574.0" onAction="#btnUpdateOnAction" prefHeight="46.0" prefWidth="120.0" style="-fx-background-color: #FAC1D9;" text="Update" visible="false">
          <font>

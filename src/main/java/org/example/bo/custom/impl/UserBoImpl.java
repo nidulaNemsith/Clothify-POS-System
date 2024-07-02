@@ -42,5 +42,9 @@ public class UserBoImpl implements UserBo {
     public boolean update(User user){
         return userDao.update(new ObjectMapper().convertValue(user, UserEntity.class));
     }
+    public ObservableList<String> getUserId(){
+        ObservableList<String> list=userDao.gettAllId();
+        return list;
+    }
 
 }

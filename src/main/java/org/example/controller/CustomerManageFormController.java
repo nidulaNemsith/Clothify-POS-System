@@ -181,7 +181,6 @@ public class CustomerManageFormController implements Initializable {
         btnDelete.setVisible(false);
         btnUpdate.setVisible(false);
         btnAdd.setVisible(true);
-        btnAdd.setDisable(false);
         txtCustomer.setEditable(false);
         formClear();
         txtCustomer.setText(customerBoImpl.generateId());

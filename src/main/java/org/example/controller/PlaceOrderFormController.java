@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,12 +44,19 @@ public class PlaceOrderFormController implements Initializable {
     public JFXComboBox optCategory;
     public TextField txtStaffId;
     public JFXButton backBtn;
+    public AnchorPane btnBack;
+    public JFXButton btnCart;
+    public TextField txtProductName;
+    public JFXComboBox optStaffId;
+    public JFXComboBox optProductID;
+    public TextField txtSize;
 
     public void btnExitOnAction(ActionEvent actionEvent) {
         System.exit(0);
     }
 
     public void btnAddOnAction(ActionEvent actionEvent) {
+
     }
     public void optOrderOnAction(ActionEvent actionEvent) {
         Object value = optOrder.getValue();
@@ -94,6 +102,7 @@ public class PlaceOrderFormController implements Initializable {
         btnDelete.setVisible(false);
         btnUpdate.setVisible(false);
         btnAdd.setVisible(true);
+        btnCart.setVisible(true);
         formClear();
         txtOrder.setEditable(false);
         txtOrderName.setEditable(true);
@@ -106,6 +115,7 @@ public class PlaceOrderFormController implements Initializable {
     private void optUpdate(){
         btnDelete.setVisible(false);
         btnAdd.setVisible(false);
+        btnCart.setVisible(false);
         btnUpdate.setVisible(true);
         formClear();
         txtOrder.setEditable(true);
@@ -119,6 +129,7 @@ public class PlaceOrderFormController implements Initializable {
     private void optDelete(){
         btnUpdate.setVisible(false);
         btnAdd.setVisible(false);
+        btnCart.setVisible(false);
         btnDelete.setVisible(true);
         formClear();
         txtOrder.setEditable(true);
@@ -147,5 +158,20 @@ public class PlaceOrderFormController implements Initializable {
     private void setSizeComboBoxValues(){
         ObservableList<String> option= FXCollections.observableArrayList("Small-S","Medium-M","Large-L","Extra Large-XXL");
         optSize.setItems(option);
+    }
+
+    public void btnCartOnAction(ActionEvent actionEvent) {
+    }
+
+    public void txtQtyOnAction(ActionEvent actionEvent) {
+    }
+
+    public void txtQtyOnKEyReleased(KeyEvent keyEvent) {
+    }
+
+    public void optStaffIdOnAction(ActionEvent actionEvent) {
+    }
+
+    public void txtProductIdOnAction(ActionEvent actionEvent) {
     }
 }

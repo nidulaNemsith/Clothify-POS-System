@@ -86,12 +86,22 @@ public class ProductDaoImpl implements ProductDao {
         session.close();
         return i>0;
     }
-
     @Override
     public String getLastId() {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         Query query = session.createQuery("SELECT id FROM product ORDER BY id DESC LIMIT 1");
         return (String) query.uniqueResult();
+    }
+    public ObservableList<String>gettAllId(){
+        Session session=HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List <String> list = session.createQuery("SELECT id FROM product").list();
+        session.close();
+        ObservableList<String> idList=FXCollections.observableArrayList();
+        list.forEach(s -> {
+            idList.add(s);
+        });
+        return idList;
     }
 }

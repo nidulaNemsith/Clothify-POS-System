@@ -92,4 +92,15 @@ public class CustomerDaoImpl implements CustomerDao {
         Query query = session.createQuery("SELECT id FROM customer ORDER BY id DESC LIMIT 1");
         return (String) query.uniqueResult();
     }
+    public ObservableList<String>gettAllId(){
+        Session session=HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List <String> list = session.createQuery("SELECT id FROM customer").list();
+        session.close();
+        ObservableList<String> idList=FXCollections.observableArrayList();
+        list.forEach(s -> {
+            idList.add(s);
+        });
+        return idList;
+    }
 }

@@ -175,7 +175,6 @@ public class StaffManageFormController implements Initializable {
         btnDelete.setVisible(false);
         btnUpdate.setVisible(false);
         btnAdd.setVisible(true);
-        btnAdd.setDisable(false);
         txtStaff.setEditable(false);
         formClear();
         txtStaff.setText(userBo.generateId());
@@ -216,7 +215,7 @@ public class StaffManageFormController implements Initializable {
         txtEmail.setText(null);
     }
     private boolean isTextFieldEmpty(){
-        return txtAddress.getText().isEmpty() || txtName.getText().isEmpty() || txtPhoneNumber.getText().isEmpty() || txtEmail.getText().isEmpty();
+        return txtAddress.getText()==null || txtName.getText()==null || txtPhoneNumber.getText()==null || txtEmail.getText()==null;
     }
 
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
@@ -226,4 +225,5 @@ public class StaffManageFormController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 }

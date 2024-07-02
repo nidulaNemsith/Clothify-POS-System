@@ -31,7 +31,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnAdd" focusTraversable="false" layoutX="27.0" layoutY="574.0" onAction="#btnAddOnAction" prefHeight="46.0" prefWidth="120.0" style="-fx-background-color: #FAC1D9;" text="Add">
+      <JFXButton fx:id="btnAdd" focusTraversable="false" layoutX="27.0" layoutY="574.0" onAction="#btnAddOnAction" prefHeight="46.0" prefWidth="120.0" style="-fx-background-color: #FAC1D9;" text="Add" visible="false">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>

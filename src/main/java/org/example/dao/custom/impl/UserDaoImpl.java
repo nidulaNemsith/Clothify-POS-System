@@ -93,4 +93,15 @@ public class UserDaoImpl implements UserDao {
         Query query = session.createQuery("SELECT id FROM user ORDER BY id DESC LIMIT 1");
         return (String) query.uniqueResult();
     }
+    public ObservableList<String>gettAllId(){
+        Session session=HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List <String> list = session.createQuery("SELECT id FROM user").list();
+        session.close();
+        ObservableList<String> idList=FXCollections.observableArrayList();
+        list.forEach(s -> {
+            idList.add(s);
+        });
+        return idList;
+    }
 }
