@@ -55,9 +55,11 @@
 
         <dependency>
             <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-fontawesome</artifactId>
-            <version>4.7.0-9.1.2</version>
+            <artifactId>fontawesomefx</artifactId>
+            <version>8.9</version>
         </dependency>
+
+
 
         <dependency>
             <groupId>com.mysql</groupId>

@@ -39,13 +39,13 @@ public class ProductDaoImpl implements ProductDao {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         Query query = session.createQuery("UPDATE product " +
-                "SET name =:name,category =:category,size =:size,qty =:qty,price=:price,supplierId=:supplierId WHERE id =:id");
-        query.setParameter("name",productEntity.getProductName());
+                "SET name =:name,category =:category,size =:size,qty =:qty,price=:price,supplierID=:supplierID WHERE id =:id");
+        query.setParameter("name",productEntity.getName());
         query.setParameter("category",productEntity.getCategory());
         query.setParameter("size",productEntity.getSize());
         query.setParameter("qty",productEntity.getQty());
         query.setParameter("price",productEntity.getPrice());
-        query.setParameter("supplierId",productEntity.getSupplierID());
+        query.setParameter("supplierID",productEntity.getSupplierID());
         query.setParameter("id",productEntity.getProductId());
 
         int i = query.executeUpdate();

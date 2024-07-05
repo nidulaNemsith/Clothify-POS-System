@@ -17,7 +17,7 @@ import lombok.Setter;
 public class ProductEntity {
     @Id
     private String productId;
-    private String productName;
+    private String name;
     private String category;
     private String size;
     private int qty;

@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.ProductBoImpl;
@@ -51,12 +52,13 @@ public class ProductManageFormController implements Initializable {
     public JFXComboBox optCategory;
     public JFXButton backBtn;
     public JFXComboBox optSupplier;
-    ProductBoImpl productBo= BoFactory.getInstance().getBo(BoType.PRODUCT);
+    public AnchorPane btnBack;
+    ProductBoImpl productBo = BoFactory.getInstance().getBo(BoType.PRODUCT);
     SupplierBoImpl supplierBo=BoFactory.getInstance().getBo(BoType.SUPPLIER);
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colProductId.setCellValueFactory(new PropertyValueFactory<>("productId"));
-        colProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        colProductName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colSize.setCellValueFactory(new PropertyValueFactory<>("size"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
@@ -123,7 +125,7 @@ public class ProductManageFormController implements Initializable {
     public void txtProductIdOnReleased(KeyEvent keyEvent) {
         try {
             Product getProduct = productBo.getProduct(txtProduct.getText());
-            txtProductName.setText(getProduct.getProductName());
+            txtProductName.setText(getProduct.getName());
             txtPrice.setText(String.valueOf(getProduct.getPrice()));
             txtQty.setText(String.valueOf(getProduct.getQty()));
             optSupplier.setValue(getProduct.getSupplierID());
