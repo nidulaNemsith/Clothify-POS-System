@@ -11,10 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -25,17 +22,20 @@ import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SupplierManageFormController implements Initializable {
-    public JFXButton btnExit;
-    public JFXButton btnAdd;
-    public JFXComboBox optSupplier;
-    public TextField txtSupplier;
-    public TextField txtName;
-    public TextField txtPhoneNumber;
-    public TextField txtEmail;
-    public TextField txtAddress;
+    @FXML
+    private JFXButton btnAdd;
+    @FXML
+    private JFXButton btnBack;
+    @FXML
+    private JFXButton btnDelete;
+    @FXML
+    private JFXButton btnExit;
+    @FXML
+    private JFXButton btnUpdate;
     @FXML
     private TableColumn<?, ?> colAddress;
     @FXML
@@ -47,11 +47,19 @@ public class SupplierManageFormController implements Initializable {
     @FXML
     private TableColumn<?, ?> colSupplierId;
     @FXML
+    private JFXComboBox<String> optSupplier;
+    @FXML
     private TableView<Supplier> tblSupplier;
-    public JFXButton btnUpdate;
-    public JFXButton btnDelete;
-    public JFXButton btnBack;
-
+    @FXML
+    private TextField txtAddress;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtName;
+    @FXML
+    private TextField txtPhoneNumber;
+    @FXML
+    private TextField txtSupplier;
     SupplierBoImpl  supplierBo=BoFactory.getInstance().getBo(BoType.SUPPLIER);
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,10 +73,12 @@ public class SupplierManageFormController implements Initializable {
     }
     public void btnUpdateOnAction(ActionEvent actionEvent) {
         if (isTextFieldEmpty()){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Empty Field");
-            alert.setContentText("Fill the empty fields");
-            alert.showAndWait();
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Empty Field",
+                    "Form Incomplete",
+                    "Fill in the empty fields"
+            );
         }else{
             Supplier supplier=new Supplier(
                     txtSupplier.getText(),
@@ -77,34 +87,54 @@ public class SupplierManageFormController implements Initializable {
                     txtEmail.getText(),
                     txtAddress.getText()
             );
-            boolean isUpdate=supplierBo.update(supplier);
-            Alert alert;
-            if(isUpdate){
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("UPDATED");
-                alert.setContentText("Supplier Updated Successfully!");
-                alert.showAndWait();
+
+            if(supplierBo.update(supplier)){
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "UPDATED",
+                        "Update Status",
+                        "Supplier Updated Successfully..!"
+                );
                 formClear();
             }else{
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setContentText("Supplier not Updated!");
-                alert.showAndWait();
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "ERROR",
+                        "Update Failure",
+                        "Supplier not Updated..!"
+                );
             }
             tblSupplier.setItems(supplierBo.getAll());
         }
     }
-
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        supplierBo.delete(txtSupplier.getText());
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("DELETED");
-        alert.setContentText("Supplier Deleted Successfully!!");
-        alert.showAndWait();
+
+        Optional<ButtonType> delete = showAlert(
+                Alert.AlertType.CONFIRMATION,
+                "DELETE",
+                "Confirmation Required",
+                "Are you sure you want to delete this supplier..?"
+        );
+
+        if (delete.isPresent() && delete.get()==ButtonType.OK && supplierBo.delete(txtSupplier.getText())){
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "DELETE",
+                        "Customer Removal",
+                        "Supplier Removed Successfully..!!"
+                );
+        }else{
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "ERROR",
+                    "Removal Failure",
+                    "Supplier not removed..!!"
+            );
+        }
         formClear();
         tblSupplier.setItems(supplierBo.getAll());
-    }
 
+    }
     public void optSupplierOnAction(ActionEvent actionEvent) {
         Object value = optSupplier.getValue();
         System.out.println(value);
@@ -134,13 +164,14 @@ public class SupplierManageFormController implements Initializable {
             btnDelete.setDisable(true);
         }
     }
-
     public void btnAddOnAction(ActionEvent actionEvent) {
         if (isTextFieldEmpty()){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Empty Field");
-            alert.setContentText("Fill the empty fields");
-            alert.showAndWait();
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Empty Field",
+                    "Form Incomplete",
+                    "Fill in the empty fields"
+            );
         }else{
            Supplier supplier=new Supplier(
                     txtSupplier.getText(),
@@ -149,36 +180,44 @@ public class SupplierManageFormController implements Initializable {
                     txtEmail.getText(),
                     txtAddress.getText()
             );
-            boolean isAdd=supplierBo.save(supplier);
-            Alert alert;
-            if(isAdd){
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("ADDED");
-                alert.setContentText("Supplier Added Successfully!");
-                alert.showAndWait();
+            if(supplierBo.save(supplier)){
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "Supplier Added",
+                        "Success",
+                        "Supplier Added Successfully..!!"
+                );
                 formClear();
                 txtSupplier.setText(supplierBo.generateId());
             }else{
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setContentText("Supplier not Added!");
-                alert.showAndWait();
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "Supplier Add Failed",
+                        "Error Adding Supplier",
+                        "An error occurred while trying to add the suppler. Please try again."
+                );
             }
             tblSupplier.setItems(supplierBo.getAll());
         }
     }
-
     public void btnExitOnAction(ActionEvent actionEvent) {
-        System.exit(0);
+        Optional<ButtonType> exit = showAlert(
+                Alert.AlertType.CONFIRMATION,
+                "Exit",
+                "Confirmation Required",
+                "Are you sure you want to EXIT..?"
+        );
+        if (exit.isPresent()&&exit.get()==ButtonType.OK){
+            System.exit(0);
+        }
     }
-
-
-
     private void setComboBoxValues(){
-        ObservableList<String> option= FXCollections.observableArrayList("Add Supplier","Update Supplier","Delete Supplier");
-        optSupplier.setItems(option);
+        optSupplier.setItems(FXCollections.observableArrayList(
+                "Add Supplier"
+                ,"Update Supplier"
+                ,"Delete Supplier"
+        ));
     }
-
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/dashBoard-admin.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -232,5 +271,12 @@ public class SupplierManageFormController implements Initializable {
     }
     private boolean isTextFieldEmpty(){
         return txtAddress.getText().isEmpty() || txtName.getText().isEmpty() || txtPhoneNumber.getText().isEmpty() || txtEmail.getText().isEmpty();
+    }
+    private Optional<ButtonType> showAlert(Alert.AlertType alertType, String title, String header, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        return alert.showAndWait();
     }
 }

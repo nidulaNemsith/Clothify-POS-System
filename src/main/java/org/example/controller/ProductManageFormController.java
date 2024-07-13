@@ -5,15 +5,13 @@ import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,32 +25,51 @@ import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ProductManageFormController implements Initializable {
+    @FXML
+    private JFXButton btnAdd;
+    @FXML
+    private JFXButton btnDelete;
+    @FXML
+    private JFXButton btnExit;
+    @FXML
+    private JFXButton btnUpdate;
+    @FXML
+    private TableColumn<?, ?> colCategory;
+    @FXML
+    private TableColumn<?, ?> colPrice;
+    @FXML
+    private TableColumn<?, ?> colProductId;
+    @FXML
+    private TableColumn<?, ?> colProductName;
+    @FXML
+    private TableColumn<?, ?> colQty;
+    @FXML
+    private TableColumn<?, ?> colSize;
+    @FXML
+    private TableColumn<?, ?> colSupplierId;
+    @FXML
+    private JFXComboBox<String> optCategory;
+    @FXML
+    private JFXComboBox<String> optProduct;
+    @FXML
+    private JFXComboBox<String> optSize;
+    @FXML
+    private JFXComboBox<String> optSupplier;
+    @FXML
+    private TableView<Product> tblProduct;
+    @FXML
+    private TextField txtPrice;
+    @FXML
+    private TextField txtProduct;
+    @FXML
+    private TextField txtProductName;
+    @FXML
+    private TextField txtQty;
 
-    public JFXButton btnExit;
-    public JFXButton btnAdd;
-    public JFXComboBox optProduct;
-    public TextField txtProduct;
-    public TextField txtQty;
-    public TextField txtPrice;
-    public TableView tblProduct;
-    public TextField txtProductName;
-    public TableColumn colProductId;
-    public TableColumn colProductName;
-    public TableColumn colCategory;
-    public TableColumn colSize;
-    public TableColumn colQty;
-    public TableColumn colSupplierId;
-    public TableColumn colPrice;
-    public JFXButton btnUpdate;
-    public JFXButton btnDelete;
-    public JFXComboBox optSize;
-    public JFXComboBox optCategory;
-    public JFXButton backBtn;
-    public JFXComboBox optSupplier;
-    public AnchorPane btnBack;
     ProductBoImpl productBo = BoFactory.getInstance().getBo(BoType.PRODUCT);
     SupplierBoImpl supplierBo=BoFactory.getInstance().getBo(BoType.SUPPLIER);
     @Override
@@ -70,58 +87,68 @@ public class ProductManageFormController implements Initializable {
         setCategoryComboBoxValues();
         setSizeComboBoxValues();
     }
-
-    public void optCategoryOnAction(ActionEvent actionEvent) {
-
-    }
-
-    public void optSizeOnAction(ActionEvent actionEvent) {
-    }
-
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        productBo.delete(txtProduct.getText());
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("DELETED");
-        alert.setContentText("Product Deleted Successfully!!");
-        alert.showAndWait();
+        Optional<ButtonType> delete = showAlert(
+                Alert.AlertType.CONFIRMATION,
+                "DELETE",
+                "Confirmation Required",
+                "Are you sure you want to delete this product..?"
+        );
+        if (delete.isPresent() && delete.get()==ButtonType.OK && productBo.delete(txtProduct.getText())){
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "DELETE",
+                        "Product Removal",
+                        "Product Removed Successfully..!!"
+                );
+        }else{
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "ERROR",
+                    "Removal Failure",
+                    "Product not removed..!!"
+            );
+        }
         formClear();
         tblProduct.setItems(productBo.getAll());
     }
-
     public void btnUpdateOnAction(ActionEvent actionEvent) {
         if (isTextFieldEmpty()){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Empty Field");
-            alert.setContentText("Fill the empty fields");
-            alert.showAndWait();
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Empty Field",
+                    "Form Incomplete",
+                    "Fill in the empty fields"
+            );
         }else{
             Product product=new Product(
                     txtProduct.getText(),
                     txtProductName.getText(),
-                    (String)optCategory.getValue(),
-                    (String)optSize.getValue(),
+                    optCategory.getValue(),
+                    optSize.getValue(),
                     Integer.parseInt(txtQty.getText()),
                     Double.parseDouble(txtPrice.getText()),
-                    (String)optSupplier.getValue()
+                    optSupplier.getValue()
             );
-            boolean isUpdate=productBo.update(product);
-            Alert alert;
-            if(isUpdate){
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("UPDATED");
-                alert.setContentText("Product Updated Successfully!");
-                alert.showAndWait();
-                formClear();
+            if(productBo.update(product)){
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "UPDATED",
+                        "Update Status",
+                        "Product Updated Successfully..!"
+                );
             }else{
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setContentText("Product not Updated!");
-                alert.showAndWait();
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "ERROR",
+                        "Update Failure",
+                        "Product not Updated..!"
+                );
             }
+            formClear();
             tblProduct.setItems(productBo.getAll());
         }
     }
-
     public void txtProductIdOnReleased(KeyEvent keyEvent) {
         try {
             Product getProduct = productBo.getProduct(txtProduct.getText());
@@ -144,7 +171,6 @@ public class ProductManageFormController implements Initializable {
             btnDelete.setDisable(true);
         }
     }
-
     public void optProductOnAction(ActionEvent actionEvent) {
         Object value = optProduct.getValue();
         System.out.println(value);
@@ -156,63 +182,71 @@ public class ProductManageFormController implements Initializable {
             optDelete();
         }
     }
-
     public void btnExitOnAction(ActionEvent actionEvent) {
-        System.exit(0);
+        Optional<ButtonType> exit = showAlert(
+                Alert.AlertType.CONFIRMATION,
+                "Exit",
+                "Confirmation Required",
+                "Are you sure you want to EXIT..?"
+        );
+        if (exit.isPresent()&&exit.get()==ButtonType.OK){
+            System.exit(0);
+        }
     }
-
     public void btnAddOnAction(ActionEvent actionEvent) {
         if (isTextFieldEmpty()){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Empty Field");
-            alert.setContentText("Fill the empty fields");
-            alert.showAndWait();
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Empty Field",
+                    "Form Incomplete",
+                    "Fill in the empty fields"
+            );
         }else{
             Product product=new Product(
                     txtProduct.getText(),
                     txtProductName.getText(),
-                    (String)optCategory.getValue(),
-                    (String)optSize.getValue(),
+                    optCategory.getValue(),
+                    optSize.getValue(),
                     Integer.parseInt(txtQty.getText()),
                     Double.parseDouble(txtPrice.getText()),
-                    (String)optSupplier.getValue()
+                    optSupplier.getValue()
             );
-            boolean isAdd=productBo.save(product);
-            Alert alert;
-            if(isAdd){
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("ADDED");
-                alert.setContentText("Product Added Successfully!");
-                alert.showAndWait();
-                formClear();
+
+            if(productBo.save(product)){
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "Product Added",
+                        "Success",
+                        "Product Added Successfully..!!"
+                );
                 txtProduct.setText(productBo.generateId());
             }else{
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setContentText("Product not Added!");
-                alert.showAndWait();
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "Product Add Failed",
+                        "Error Adding Product",
+                        "An error occurred while trying to add the product. Please try again."
+                );
             }
+            formClear();
             tblProduct.setItems(productBo.getAll());
         }
     }
-
-
-
     private void setComboBoxValues(){
-        ObservableList<String> option= FXCollections.observableArrayList("Add Product","Update Product","Delete Product");
-        optProduct.setItems(option);
+        optProduct.setItems(FXCollections.observableArrayList(
+                "Add Product",
+                "Update Product",
+                "Delete Product"
+        ));
     }
-
     private void setCategoryComboBoxValues(){
         ObservableList<String> option= FXCollections.observableArrayList("Gents","Ladies","Kids");
         optCategory.setItems(option);
     }
-
     private void setSizeComboBoxValues(){
         ObservableList<String> option= FXCollections.observableArrayList("Small-S","Medium-M","Large-L","Extra Large-XXL");
         optSize.setItems(option);
     }
-
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/dashBoard-admin.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -220,14 +254,6 @@ public class ProductManageFormController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-    public void txtQtykeyReleased(KeyEvent keyEvent){
-
-    }
-
-    public void txtPriceKeyReleased(KeyEvent keyEvent) {
-    }
-
     private void optAdd(){
         btnDelete.setVisible(false);
         btnUpdate.setVisible(false);
@@ -277,9 +303,12 @@ public class ProductManageFormController implements Initializable {
     private boolean isTextFieldEmpty(){
         return txtProductName.getText()==null || txtQty.getText()==null || txtPrice.getText()==null || optCategory.getValue()==null ||optSize.getValue()==null || optSupplier.getValue()==null;
     }
-
-
-    public void optSupplierOnAction(ActionEvent actionEvent) {
-
+    private Optional<ButtonType> showAlert(Alert.AlertType alertType, String title, String header, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        return alert.showAndWait();
     }
+
 }

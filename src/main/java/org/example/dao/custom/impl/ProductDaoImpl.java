@@ -3,6 +3,7 @@ package org.example.dao.custom.impl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.dao.custom.ProductDao;
+import org.example.dto.OrderHasItem;
 import org.example.entity.ProductEntity;
 import org.example.entity.SupplierEntity;
 import org.example.entity.UserEntity;
@@ -54,6 +55,59 @@ public class ProductDaoImpl implements ProductDao {
 
         return i>0;
     }
+
+    public boolean increaseQtyOfProduct(String id, int qty) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE product SET qty=qty + :qty WHERE id=:id");
+        query.setParameter("qty",qty);
+        query.setParameter("id",id);
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return i>0;
+    }
+    public boolean decreaseQtyOfProduct(String id, int qty) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE product SET qty=qty - :qty WHERE id=:id");
+        query.setParameter("qty",qty);
+        query.setParameter("id",id);
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return i>0;
+    }
+    public boolean increaseQty(ObservableList<OrderHasItem>productIdList){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE product SET qty=qty+:qty WHERE id=:id");
+
+        productIdList.forEach(orderHasItem -> {
+            query.setParameter("qty",orderHasItem.getQty());
+            query.setParameter("id",orderHasItem.getProductId());
+            query.executeUpdate();
+        });
+        session.getTransaction().commit();
+        session.close();
+        return true;
+    }
+
+    public boolean decreaseQty(ObservableList<OrderHasItem>productIdList){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE product SET qty=qty-:qty WHERE id=:id");
+
+        productIdList.forEach(orderHasItem -> {
+            query.setParameter("qty",orderHasItem.getQty());
+            query.setParameter("id",orderHasItem.getProductId());
+            query.executeUpdate();
+        });
+        session.getTransaction().commit();
+        session.close();
+        return true;
+    }
+
 
     @Override
     public boolean delete(ProductEntity productEntity) {

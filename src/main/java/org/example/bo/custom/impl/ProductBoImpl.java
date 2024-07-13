@@ -14,6 +14,7 @@ import org.example.util.DaoType;
 public class ProductBoImpl implements ProductBo{
     private ProductDaoImpl productDao= DaoFactory.getInstance().getDao(DaoType.PRODUCT);
 
+
     public boolean save(Product product){
         return productDao.save(new ObjectMapper().convertValue(product, ProductEntity.class));
     }
@@ -47,5 +48,12 @@ public class ProductBoImpl implements ProductBo{
         ObservableList<String> list=productDao.gettAllId();
         return list;
     }
+    public boolean increaseQtyById(String id,int qty){
+       return productDao.increaseQtyOfProduct(id,qty);
+    }
+    public boolean decreaseQtyById(String id,int qty){
+        return productDao.decreaseQtyOfProduct(id,qty);
+    }
+
 
 }

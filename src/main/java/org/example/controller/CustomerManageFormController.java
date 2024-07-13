@@ -11,10 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -25,6 +22,7 @@ import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerManageFormController implements Initializable {
@@ -63,20 +61,40 @@ public class CustomerManageFormController implements Initializable {
         setComboBoxValues();
     }
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        customerBoImpl.delete(txtCustomer.getText());
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("DELETED");
-        alert.setContentText("Customer Deleted Successfully!!");
-        alert.showAndWait();
+
+        Optional<ButtonType> delete = showAlert(
+                Alert.AlertType.CONFIRMATION,
+                "DELETE",
+                "Confirmation Required",
+                "Are you sure you want to delete this customer..?"
+        );
+        if (delete.isPresent()&&delete.get()==ButtonType.OK && customerBoImpl.delete(txtCustomer.getText())){
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "DELETE",
+                        "Customer Removal",
+                        "Customer Removed Successfully..!"
+                );
+        }else{
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "ERROR",
+                    "Removal Failure",
+                    "Customer not removed..!"
+            );
+        }
         formClear();
         tblCustomer.setItems(customerBoImpl.getAll());
+
     }
     public void btnUpdateOnAction(ActionEvent actionEvent) {
         if (isTextFieldEmpty()){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Empty Field");
-            alert.setContentText("Fill the empty fields");
-            alert.showAndWait();
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Empty Field",
+                    "Form Incomplete",
+                    "Fill in the empty fields"
+            );
         }else{
             Customer customer=new Customer(
                     txtCustomer.getText(),
@@ -85,32 +103,45 @@ public class CustomerManageFormController implements Initializable {
                     txtEmail.getText(),
                     txtAddress.getText()
             );
-            boolean isUpdate=customerBoImpl.update(customer);
-            Alert alert;
-            if(isUpdate){
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("UPDATED");
-                alert.setContentText("Customer Updated Successfully!");
-                alert.showAndWait();
-                formClear();
+
+            if(customerBoImpl.update(customer)){
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "UPDATED",
+                        "Update Status",
+                        "Customer Updated Successfully..!"
+                );
             }else{
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setContentText("Customer not Updated!");
-                alert.showAndWait();
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "ERROR",
+                        "Update Failure",
+                        "Customer not Updated..!"
+                );
             }
+            formClear();
             tblCustomer.setItems(customerBoImpl.getAll());
         }
     }
     public void btnExitOnAction(ActionEvent actionEvent) {
-        System.exit(0);
+        Optional<ButtonType> exit = showAlert(
+                Alert.AlertType.CONFIRMATION,
+                "Exit",
+                "Confirmation Required",
+                "Are you sure you want to EXIT..?"
+        );
+        if (exit.isPresent()&&exit.get()==ButtonType.OK){
+            System.exit(0);
+        }
     }
     public void btnAddOnAction(ActionEvent actionEvent) {
         if (isTextFieldEmpty()){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Empty Field");
-            alert.setContentText("Fill the empty fields");
-            alert.showAndWait();
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Empty Field",
+                    "Form Incomplete",
+                    "Fill in the empty fields..!!"
+            );
         }else{
             Customer customer=new Customer(
                     txtCustomer.getText(),
@@ -119,27 +150,28 @@ public class CustomerManageFormController implements Initializable {
                     txtEmail.getText(),
                     txtAddress.getText()
             );
-            boolean isAdd=customerBoImpl.save(customer);
-            Alert alert;
-            if(isAdd){
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("ADDED");
-                alert.setContentText("Customer Added Successfully!");
-                alert.showAndWait();
+            if(customerBoImpl.save(customer)){
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "Customer Added",
+                        "Success",
+                        "Customer Added Successfully..!!"
+                );
                 formClear();
                 txtCustomer.setText(customerBoImpl.generateId());
             }else{
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setContentText("Customer not Added!");
-                alert.showAndWait();
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "Customer Add Failed",
+                        "Error Adding Customer",
+                        "An error occurred while trying to add the customer. Please try again."
+                );
             }
             tblCustomer.setItems(customerBoImpl.getAll());
         }
     }
     public void optCustomerOnAction(ActionEvent actionEvent) {
         Object value = optCustomer.getValue();
-        System.out.println(value);
         if (value.equals("Add Customer")){
             optAdd();
         } else if (value.equals("Update Customer")){
@@ -220,6 +252,13 @@ public class CustomerManageFormController implements Initializable {
     }
     private boolean isTextFieldEmpty(){
         return txtAddress.getText().isEmpty() || txtName.getText().isEmpty() || txtPhoneNumber.getText().isEmpty() || txtEmail.getText().isEmpty();
+    }
+    private Optional<ButtonType> showAlert(Alert.AlertType alertType, String title,String header,String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        return alert.showAndWait();
     }
 
 }

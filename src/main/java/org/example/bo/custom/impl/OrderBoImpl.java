@@ -7,7 +7,6 @@ import org.example.bo.custom.OrderBo;
 import org.example.dao.DaoFactory;
 import org.example.dao.custom.impl.OrderDaoImpl;
 import org.example.dto.Order;
-import org.example.dto.Product;
 import org.example.entity.OrderEntity;
 import org.example.util.DaoType;
 
@@ -24,10 +23,6 @@ public class OrderBoImpl implements OrderBo {
         int num = Integer.parseInt(orderDao.getLastId().split("OR")[1]);
         num++;
         return String.format("OR%04d",num);
-    }
-    public Order getOrder(String id){
-        OrderEntity orderEntity = orderDao.search(id);
-        return new ObjectMapper().convertValue(orderEntity,Order.class);
     }
     public boolean delete(String id){
         return orderDao.deleteById(id);
@@ -46,5 +41,9 @@ public class OrderBoImpl implements OrderBo {
     public ObservableList<String> getOrderId(){
         ObservableList<String> list=orderDao.gettAllId();
         return list;
+    }
+    public Order getOrder(String id) {
+        OrderEntity orderEntity = orderDao.search(id);
+        return new ObjectMapper().convertValue(orderEntity,Order.class);
     }
 }

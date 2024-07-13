@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.Bloom?>
@@ -38,7 +39,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnStaff" focusTraversable="false" layoutX="31.0" layoutY="147.0" onAction="#btnStaffAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Staff">
+      <JFXButton fx:id="btnStaff" focusTraversable="false" layoutX="31.0" layoutY="285.0" onAction="#btnStaffAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Staff">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -49,7 +50,7 @@
             <Glow level="0.4" />
          </effect>
       </JFXButton>
-      <JFXButton fx:id="btnProduct" focusTraversable="false" layoutX="31.0" layoutY="286.0" onAction="#btnProductOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Product">
+      <JFXButton fx:id="btnProduct" focusTraversable="false" layoutX="31.0" layoutY="216.0" onAction="#btnProductOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Product">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -60,7 +61,7 @@
             <Bloom />
          </effect>
       </JFXButton>
-      <JFXButton fx:id="btnOrder" focusTraversable="false" layoutX="31.0" layoutY="356.0" onAction="#btnOrderOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Order">
+      <JFXButton fx:id="btnOrder" focusTraversable="false" layoutX="31.0" layoutY="147.0" onAction="#btnOrderOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Order">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -68,7 +69,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnSuppliers" focusTraversable="false" layoutX="31.0" layoutY="429.0" onAction="#btnSuppliersOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Suppliers">
+      <JFXButton fx:id="btnSuppliers" focusTraversable="false" layoutX="31.0" layoutY="356.0" onAction="#btnSuppliersOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Suppliers">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -97,7 +98,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnCustomer" focusTraversable="false" layoutX="31.0" layoutY="216.0" onAction="#btnCustomerOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Customer">
+      <JFXButton fx:id="btnCustomer" focusTraversable="false" layoutX="31.0" layoutY="430.0" onAction="#btnCustomerOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Customer">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -109,5 +110,6 @@
          </effect>
       </JFXButton>
       <Separator layoutX="814.0" layoutY="84.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="0.0" />
+      <PieChart layoutX="501.0" layoutY="174.0" prefHeight="412.0" prefWidth="449.0" style="-fx-background-color: white;" />
    </children>
 </AnchorPane>

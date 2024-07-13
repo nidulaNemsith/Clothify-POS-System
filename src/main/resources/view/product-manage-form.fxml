@@ -75,8 +75,8 @@
          </font>
       </Label>
       <TextField fx:id="txtProductName" focusTraversable="false" layoutX="31.0" layoutY="244.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Product Name" style="-fx-background-color: #777979;" />
-      <TextField fx:id="txtQty" focusTraversable="false" layoutX="31.0" layoutY="492.0" onKeyReleased="#txtQtykeyReleased" prefHeight="38.0" prefWidth="246.0" promptText="Enter Qty" style="-fx-background-color: #777979;" />
-      <TextField fx:id="txtPrice" focusTraversable="false" layoutX="31.0" layoutY="554.0" onKeyReleased="#txtPriceKeyReleased" prefHeight="38.0" prefWidth="246.0" promptText="Enter Price" style="-fx-background-color: #777979;" />
+      <TextField fx:id="txtQty" focusTraversable="false" layoutX="31.0" layoutY="492.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Qty" style="-fx-background-color: #777979;" />
+      <TextField fx:id="txtPrice" focusTraversable="false" layoutX="31.0" layoutY="554.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Price" style="-fx-background-color: #777979;" />
       <Separator layoutX="295.0" layoutY="110.0" orientation="VERTICAL" prefHeight="547.0" prefWidth="0.0" />
       <TableView fx:id="tblProduct" fixedCellSize="0.0" layoutX="308.0" layoutY="110.0" prefHeight="547.0" prefWidth="673.0">
          <columns>
@@ -114,12 +114,12 @@
             <Glow level="0.4" />
          </effect>
       </JFXButton>
-      <JFXComboBox fx:id="optSize" focusColor="#4d4d4d" layoutX="31.0" layoutY="368.0" onAction="#optSizeOnAction" prefHeight="38.0" prefWidth="246.0" promptText="Select Option" style="-fx-background-color: #BDC3C7;">
+      <JFXComboBox fx:id="optSize" focusColor="#4d4d4d" layoutX="31.0" layoutY="368.0" prefHeight="38.0" prefWidth="246.0" promptText="Select Option" style="-fx-background-color: #BDC3C7;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXComboBox>
-      <JFXComboBox fx:id="optCategory" focusColor="#4d4d4d" layoutX="31.0" layoutY="306.0" onAction="#optCategoryOnAction" prefHeight="38.0" prefWidth="246.0" promptText="Select Option" style="-fx-background-color: #BDC3C7;">
+      <JFXComboBox fx:id="optCategory" focusColor="#4d4d4d" layoutX="31.0" layoutY="306.0" prefHeight="38.0" prefWidth="246.0" promptText="Select Option" style="-fx-background-color: #BDC3C7;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -145,7 +145,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXComboBox fx:id="optSupplier" focusColor="#4d4d4d" layoutX="31.0" layoutY="430.0" onAction="#optSupplierOnAction" prefHeight="38.0" prefWidth="246.0" promptText="Select Option" style="-fx-background-color: #BDC3C7;">
+      <JFXComboBox fx:id="optSupplier" focusColor="#4d4d4d" layoutX="31.0" layoutY="430.0" prefHeight="38.0" prefWidth="246.0" promptText="Select Option" style="-fx-background-color: #BDC3C7;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

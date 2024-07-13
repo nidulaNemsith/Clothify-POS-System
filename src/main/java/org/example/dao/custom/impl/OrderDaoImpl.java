@@ -35,7 +35,12 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean update(OrderEntity orderEntity) {
-        return false;
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        session.update(orderEntity);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override

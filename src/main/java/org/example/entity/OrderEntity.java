@@ -17,7 +17,7 @@ import lombok.Setter;
 public class OrderEntity {
     @Id
     private String orderId;
-    private String custID;
+    private String customerId;
     private int qty;
     private double total;
     private String staffId;
