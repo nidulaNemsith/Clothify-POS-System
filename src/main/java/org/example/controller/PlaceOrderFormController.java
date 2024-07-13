@@ -258,12 +258,10 @@ public class PlaceOrderFormController implements Initializable {
 
         if (orderDetailBo.isProductInCart(orderId,productId)){
             handleExistingItem(orderId,productId,qty,amount,isPlaceOrder);
-            cartFormClear();
         }else{
             handleNewProduct(orderId,productId,qty,amount);
-            cartFormClear();
         }
-
+        cartFormClear();
 
     }
     public void optOrderOnAction(ActionEvent actionEvent) {
