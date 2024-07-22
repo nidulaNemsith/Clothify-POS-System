@@ -46,4 +46,5 @@ public class SupplierBoImpl implements SupplierBo {
          ObservableList<String> list=supplierDao.gettAllId();
          return list;
     }
+
 }

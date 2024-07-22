@@ -14,17 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.ProductBoImpl;
 import org.example.bo.custom.impl.SupplierBoImpl;
 import org.example.dto.Product;
-import org.example.dto.User;
 import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -72,6 +71,7 @@ public class ProductManageFormController implements Initializable {
 
     ProductBoImpl productBo = BoFactory.getInstance().getBo(BoType.PRODUCT);
     SupplierBoImpl supplierBo=BoFactory.getInstance().getBo(BoType.SUPPLIER);
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colProductId.setCellValueFactory(new PropertyValueFactory<>("productId"));
@@ -173,7 +173,6 @@ public class ProductManageFormController implements Initializable {
     }
     public void optProductOnAction(ActionEvent actionEvent) {
         Object value = optProduct.getValue();
-        System.out.println(value);
         if (value.equals("Add Product")){
             optAdd();
         } else if (value.equals("Update Product")){
@@ -232,6 +231,14 @@ public class ProductManageFormController implements Initializable {
             tblProduct.setItems(productBo.getAll());
         }
     }
+    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
+        String role = CurrentLogInUserController.getInstance().getRole();
+        switch (role){
+            case "Admin":loadAdminPage(actionEvent);break;
+            case "Staff":loadStaffPage(actionEvent);break;
+            default:break;
+        }
+    }
     private void setComboBoxValues(){
         optProduct.setItems(FXCollections.observableArrayList(
                 "Add Product",
@@ -246,13 +253,6 @@ public class ProductManageFormController implements Initializable {
     private void setSizeComboBoxValues(){
         ObservableList<String> option= FXCollections.observableArrayList("Small-S","Medium-M","Large-L","Extra Large-XXL");
         optSize.setItems(option);
-    }
-    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/dashBoard-admin.fxml"));
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
     private void optAdd(){
         btnDelete.setVisible(false);
@@ -309,6 +309,20 @@ public class ProductManageFormController implements Initializable {
         alert.setHeaderText(header);
         alert.setContentText(content);
         return alert.showAndWait();
+    }
+    private void loadAdminPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/dashBoard-admin.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    private void loadStaffPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/dashBoard-staff.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

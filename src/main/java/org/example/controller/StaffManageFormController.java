@@ -3,7 +3,6 @@ package org.example.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,13 +16,15 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.impl.UserBoImpl;
-import org.example.dto.Supplier;
 import org.example.dto.User;
 import org.example.util.BoType;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class StaffManageFormController implements Initializable {
@@ -81,6 +82,7 @@ public class StaffManageFormController implements Initializable {
         }
     }
     public void btnAddOnAction(ActionEvent actionEvent) {
+
         if (isTextFieldEmpty()){
             showAlert(
                     Alert.AlertType.ERROR,
@@ -88,36 +90,118 @@ public class StaffManageFormController implements Initializable {
                     "Form Incomplete",
                     "Fill in the empty fields"
             );
-        }else{
-            User user=new User(
-                    txtStaff.getText(),
-                    txtName.getText(),
-                    txtEmail.getText(),
-                    txtPhoneNumber.getText(),
-                    "0000",
-                    "Staff",
-                    txtAddress.getText()
+            return;
+        }
+
+        if (isExistEmailAndPhoneNumber()){
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "User Already Exists",
+                    "Duplicate Entry",
+                    "A user with this email or phone number already exists. " +
+                            "Please use a different email or phone number."
             );
-            if(userBo.save(user)){
+            return;
+        }
+        if (!userBo.isValidEmail(txtEmail.getText())){
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Login Error",
+                    "Invalid Email",
+                    "Please enter a valid email."
+            );
+            txtEmail.setText(null);
+            return;
+        }
+        User user=new User(
+                txtStaff.getText(),
+                txtName.getText(),
+                txtEmail.getText(),
+                txtPhoneNumber.getText(),
+                userBo.hashPassword(generatePassword()),
+                "Staff",
+                txtAddress.getText()
+        );
+        if(userBo.save(user)){
+            showAlert(
+                    Alert.AlertType.INFORMATION,
+                    "Staff Member Added",
+                    "Success",
+                    "Staff Member Added Successfully..!!"
+            );
+            try {
                 showAlert(
                         Alert.AlertType.INFORMATION,
-                        "Staff Member Added",
-                        "Success",
-                        "Staff Member Added Successfully..!!"
+                        "Password Sent",
+                        "Check Your Email",
+                        "Your password has been sent to your email address. Please check your inbox."
                 );
-                txtStaff.setText(userBo.generateId());
-            }else{
+                userBo.sendEmail(txtEmail.getText(),mailBody(),"Password");
+
+            } catch (MessagingException e) {
                 showAlert(
                         Alert.AlertType.ERROR,
-                        "Staff Member Add Failed",
-                        "Error Adding Staff Member",
-                        "An error occurred while trying to add the member. Please try again."
+                        "Password Send Error",
+                        "Email Not Sent",
+                        "There was an error sending your password to your email address. Please try again."
                 );
             }
             formClear();
-            tblStaff.setItems(userBo.getAll());
+            txtStaff.setText(userBo.generateId());
+        }else{
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Staff Member Add Failed",
+                    "Error Adding Staff Member",
+                    "An error occurred while trying to add the member. Please try again."
+            );
+        }
+        tblStaff.setItems(userBo.getAll());
+    }
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+        if (isTextFieldEmpty()){
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Empty Field",
+                    "Form Incomplete",
+                    "Fill in the empty fields"
+            );
+            return;
+        }
+        if (isExistEmailAndPhoneNumber()){
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "User Already Exists",
+                    "Duplicate Entry",
+                    "A user with this email or phone number already exists. " +
+                            "Please use a different email or phone number."
+            );
+            return;
         }
 
+        User user = userBo.getUser(txtStaff.getText());
+        user.setName(txtName.getText());
+        user.setEmail(txtEmail.getText());
+        user.setAddress(txtAddress.getText());
+        user.setPhoneNumber(txtPhoneNumber.getText());
+
+        if(userBo.update(user)){
+            showAlert(
+                    Alert.AlertType.INFORMATION,
+                    "UPDATED",
+                    "Update Status",
+                    "Member Updated Successfully..!"
+            );
+        }else{
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "ERROR",
+                    "Update Failure",
+                    "Member not Updated..!"
+            );
+        }
+        formClear();
+        tblStaff.setItems(userBo.getAll());
     }
     public void optStaffOnAction(ActionEvent actionEvent) {
         Object value = optStaff.getValue();
@@ -172,49 +256,14 @@ public class StaffManageFormController implements Initializable {
         formClear();
         tblStaff.setItems(userBo.getAll());
     }
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
-        if (isTextFieldEmpty()){
-            showAlert(
-                    Alert.AlertType.ERROR,
-                    "Empty Field",
-                    "Form Incomplete",
-                    "Fill in the empty fields"
-            );
-        }else{
-            User user=new User(
-                    txtStaff.getText(),
-                    txtName.getText(),
-                    txtEmail.getText(),
-                    txtPhoneNumber.getText(),
-                    "0000",
-                    "Staff",
-                    txtAddress.getText()
-            );
-            if(userBo.update(user)){
-                showAlert(
-                        Alert.AlertType.INFORMATION,
-                        "UPDATED",
-                        "Update Status",
-                        "Member Updated Successfully..!"
-                );
-            }else{
-                showAlert(
-                        Alert.AlertType.ERROR,
-                        "ERROR",
-                        "Update Failure",
-                        "Member not Updated..!"
-                );
-            }
-            formClear();
-            tblStaff.setItems(userBo.getAll());
-        }
-    }
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/dashBoard-admin.fxml"));
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        String role = CurrentLogInUserController.getInstance().getRole();
+
+        switch (role){
+            case "Admin":loadAdminPage(actionEvent);break;
+            case "Staff":loadStaffPage(actionEvent);break;
+            default:break;
+        }
     }
     private void setComboBoxValues(){
         optStaff.setItems(FXCollections.observableArrayList(
@@ -276,6 +325,34 @@ public class StaffManageFormController implements Initializable {
         alert.setContentText(content);
         return alert.showAndWait();
     }
+    private void loadAdminPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/dashBoard-admin.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    private void loadStaffPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/dashBoard-staff.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    private static String generatePassword() {
+        Random random=new Random();
+        int p = random.nextInt(99999999) + 10000000;
+        System.out.println(p);
+        return Integer.toString(p);
+    }
+    private String mailBody(){
+        return "Dear "+txtName.getText()+","+
+                "\n\nYour password is: "+"["+generatePassword()+"]"+
+                "\n\nPlease log in and change your password as soon as possible.\nThank you,\n[Clothify Store]";
 
-
+    }
+    private boolean isExistEmailAndPhoneNumber(){
+        return userBo.getUserByEmail(txtEmail.getText())!=null ||
+                userBo.getUserByPhoneNumber(txtPhoneNumber.getText())!=null;
+    }
 }

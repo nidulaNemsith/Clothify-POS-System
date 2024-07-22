@@ -24,7 +24,6 @@ public class UserDaoImpl implements UserDao {
         session.close();
         return userEntity;
     }
-
     @Override
     public boolean save(UserEntity userEntity) {
         Session session = HibernateUtil.getSession();
@@ -34,7 +33,6 @@ public class UserDaoImpl implements UserDao {
         session.close();
         return true;
     }
-
     @Override
     public boolean update(UserEntity userEntity) {
         Session session = HibernateUtil.getSession();
@@ -53,12 +51,10 @@ public class UserDaoImpl implements UserDao {
 
         return i>0;
     }
-
     @Override
     public boolean delete(UserEntity userEntity) {
         return false;
     }
-
     @Override
     public ObservableList<UserEntity> findAll() {
         Session session = HibernateUtil.getSession();
@@ -73,7 +69,6 @@ public class UserDaoImpl implements UserDao {
         });
         return userEntityList;
     }
-
     @Override
     public boolean deleteById(String id) {
         Session session = HibernateUtil.getSession();
@@ -85,7 +80,6 @@ public class UserDaoImpl implements UserDao {
         session.close();
         return i>0;
     }
-
     @Override
     public String getLastId() {
         Session session = HibernateUtil.getSession();
@@ -104,4 +98,26 @@ public class UserDaoImpl implements UserDao {
         });
         return idList;
     }
+    public  boolean updateUserPassword(String email,String password){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("UPDATE user " +
+                "SET password=:password WHERE email=:email");
+        query.setParameter("email",email);
+        query.setParameter("password",password);
+        int i = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return i>0;
+    }
+    public UserEntity getUserEntityByEmail(String email){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Query query = session.createQuery("FROM user WHERE email=:email");
+        query.setParameter("email",email);
+        UserEntity userEntity = (UserEntity) query.uniqueResult();
+        session.close();
+        return userEntity;
+    }
+
 }

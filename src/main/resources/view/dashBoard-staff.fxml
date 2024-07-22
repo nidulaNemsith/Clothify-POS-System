@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Reflection?>
@@ -16,7 +17,7 @@
             <Font name="Candara Bold" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="lblTime" layoutX="738.0" layoutY="74.0" prefHeight="47.0" prefWidth="76.0" text="23:00" textFill="#fac1d9">
+      <Label fx:id="lblTime" layoutX="640.0" layoutY="74.0" prefHeight="47.0" prefWidth="166.0" text="23:00" textFill="#fac1d9">
          <font>
             <Font name="Calibri Bold" size="30.0" />
          </font>
@@ -37,7 +38,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnCustomer" layoutX="31.0" layoutY="147.0" onAction="#btnCustomerOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Customer">
+      <JFXButton fx:id="btnCustomer" layoutX="31.0" layoutY="402.0" onAction="#btnCustomerOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Customer">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -48,7 +49,7 @@
             <Glow level="0.4" />
          </effect>
       </JFXButton>
-      <JFXButton fx:id="btnProduct" layoutX="31.0" layoutY="227.0" onAction="#btnProductOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Product">
+      <JFXButton fx:id="btnProduct" layoutX="31.0" layoutY="230.0" onAction="#btnProductOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Product">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -59,7 +60,7 @@
             <Bloom />
          </effect>
       </JFXButton>
-      <JFXButton fx:id="btnOrder" layoutX="31.0" layoutY="306.0" onAction="#btnOrderOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Order">
+      <JFXButton fx:id="btnOrder" layoutX="31.0" layoutY="145.0" onAction="#btnOrderOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Order">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -67,7 +68,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnSuppliers" layoutX="31.0" layoutY="381.0" onAction="#btnSuppliersOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Suppliers">
+      <JFXButton fx:id="btnSuppliers" layoutX="31.0" layoutY="316.0" onAction="#btnSuppliersOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Suppliers">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -75,7 +76,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnReport" layoutX="31.0" layoutY="473.0" onAction="#btnReportOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Report">
+      <JFXButton fx:id="btnReport" layoutX="31.0" layoutY="489.0" onAction="#btnReportOnAction" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: #FAC1D9;" text="Report">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -83,12 +84,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label fx:id="lblName" layoutX="199.0" layoutY="63.0" prefHeight="60.0" prefWidth="188.0" text="  Mr Nidula" textFill="#fac1d9">
+      <Label fx:id="lblName" layoutX="210.0" layoutY="63.0" prefHeight="60.0" prefWidth="293.0" text="  Mr Nidula" textFill="#fac1d9">
          <font>
             <Font name="Candara Bold" size="40.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnLogOut" layoutX="31.0" layoutY="554.0" onAction="#btnLogOutOnAction" prefHeight="46.0" prefWidth="105.0" style="-fx-background-color: #e74c3c;" text="Log Out" textOverrun="CLIP">
+      <JFXButton fx:id="btnLogOut" layoutX="31.0" layoutY="594.0" onAction="#btnLogOutOnAction" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #e74c3c;" text="Log Out" textOverrun="CLIP">
          <font>
             <Font name="Cambria Bold" size="14.0" />
          </font>
@@ -96,5 +97,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <Separator layoutX="813.0" layoutY="84.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="0.0" />
    </children>
 </AnchorPane>

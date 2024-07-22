@@ -113,7 +113,7 @@
       </JFXButton>
       <TableView fx:id="tblCustomer" layoutX="309.0" layoutY="110.0" prefHeight="516.0" prefWidth="655.0">
         <columns>
-          <TableColumn fx:id="colCustId" prefWidth="104.0" text="Customer ID" />
+          <TableColumn fx:id="colCustomerId" prefWidth="104.0" text="Customer ID" />
           <TableColumn fx:id="colName" prefWidth="117.0" text="Name" />
             <TableColumn fx:id="colPhoneNumber" prefWidth="122.0" text="Phone Number" />
             <TableColumn fx:id="colEmail" prefWidth="162.0" text="Email" />

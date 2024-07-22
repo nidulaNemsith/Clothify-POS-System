@@ -85,7 +85,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label fx:id="lblName" layoutX="199.0" layoutY="63.0" prefHeight="60.0" prefWidth="188.0" text="  Mr Nidula" textFill="#fac1d9">
+      <Label fx:id="lblName" layoutX="210.0" layoutY="63.0" prefHeight="60.0" prefWidth="280.0" text="  Mr Nidula" textFill="#fac1d9">
          <font>
             <Font name="Candara Bold" size="40.0" />
          </font>

@@ -7,6 +7,7 @@ import org.example.bo.custom.OrderDetailBo;
 import org.example.dao.DaoFactory;
 import org.example.dao.custom.impl.OrderDetailDaoImpl;
 import org.example.dto.OrderHasItem;
+import org.example.dto.Product;
 import org.example.entity.OrderHasItemEntity;
 import org.example.util.DaoType;
 import java.util.List;
@@ -65,7 +66,6 @@ public class OrderDetailBoImpl implements OrderDetailBo {
     public ObservableList<String>getProductIds(String orderId){
         return orderDetailDao.getProductIdsByOrderId(orderId);
     }
-
     public OrderHasItem getOrderItem(String orderId,String productId){
         OrderHasItemEntity item = orderDetailDao.getItem(orderId, productId);
         return new ObjectMapper().convertValue(item,OrderHasItem.class);

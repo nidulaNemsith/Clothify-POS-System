@@ -3,7 +3,6 @@ package org.example.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +21,7 @@ import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -60,7 +60,9 @@ public class SupplierManageFormController implements Initializable {
     private TextField txtPhoneNumber;
     @FXML
     private TextField txtSupplier;
+
     SupplierBoImpl  supplierBo=BoFactory.getInstance().getBo(BoType.SUPPLIER);
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colSupplierId.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
@@ -137,7 +139,6 @@ public class SupplierManageFormController implements Initializable {
     }
     public void optSupplierOnAction(ActionEvent actionEvent) {
         Object value = optSupplier.getValue();
-        System.out.println(value);
         if (value.equals("Add Supplier")){
             optAdd();
         } else if (value.equals("Update Supplier")){
@@ -172,33 +173,34 @@ public class SupplierManageFormController implements Initializable {
                     "Form Incomplete",
                     "Fill in the empty fields"
             );
-        }else{
-           Supplier supplier=new Supplier(
-                    txtSupplier.getText(),
-                    txtName.getText(),
-                    txtPhoneNumber.getText(),
-                    txtEmail.getText(),
-                    txtAddress.getText()
-            );
-            if(supplierBo.save(supplier)){
-                showAlert(
-                        Alert.AlertType.INFORMATION,
-                        "Supplier Added",
-                        "Success",
-                        "Supplier Added Successfully..!!"
-                );
-                formClear();
-                txtSupplier.setText(supplierBo.generateId());
-            }else{
-                showAlert(
-                        Alert.AlertType.ERROR,
-                        "Supplier Add Failed",
-                        "Error Adding Supplier",
-                        "An error occurred while trying to add the suppler. Please try again."
-                );
-            }
-            tblSupplier.setItems(supplierBo.getAll());
+            return;
         }
+
+        Supplier supplier=new Supplier(
+                txtSupplier.getText(),
+                txtName.getText(),
+                txtPhoneNumber.getText(),
+                txtEmail.getText(),
+                txtAddress.getText()
+        );
+        if(supplierBo.save(supplier)){
+            showAlert(
+                    Alert.AlertType.INFORMATION,
+                    "Supplier Added",
+                    "Success",
+                    "Supplier Added Successfully..!!"
+            );
+            formClear();
+            txtSupplier.setText(supplierBo.generateId());
+        }else{
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Supplier Add Failed",
+                    "Error Adding Supplier",
+                    "An error occurred while trying to add the suppler. Please try again."
+            );
+        }
+        tblSupplier.setItems(supplierBo.getAll());
     }
     public void btnExitOnAction(ActionEvent actionEvent) {
         Optional<ButtonType> exit = showAlert(
@@ -211,19 +213,21 @@ public class SupplierManageFormController implements Initializable {
             System.exit(0);
         }
     }
+    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
+        String role = CurrentLogInUserController.getInstance().getRole();
+
+        switch (role){
+            case "Admin":loadAdminPage(actionEvent);break;
+            case "Staff":loadStaffPage(actionEvent);break;
+            default:break;
+        }
+    }
     private void setComboBoxValues(){
         optSupplier.setItems(FXCollections.observableArrayList(
-                "Add Supplier"
-                ,"Update Supplier"
-                ,"Delete Supplier"
+                "Add Supplier",
+                "Update Supplier",
+                "Delete Supplier"
         ));
-    }
-    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/dashBoard-admin.fxml"));
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
     private void optAdd(){
         btnDelete.setVisible(false);
@@ -279,4 +283,19 @@ public class SupplierManageFormController implements Initializable {
         alert.setContentText(content);
         return alert.showAndWait();
     }
+    private void loadAdminPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/dashBoard-admin.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    private void loadStaffPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/dashBoard-staff.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

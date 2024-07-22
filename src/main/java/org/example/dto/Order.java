@@ -15,5 +15,7 @@ public class Order {
     private int qty;
     private double total;
     private String staffId;
+    private String date;
+    private String time;
 
 }

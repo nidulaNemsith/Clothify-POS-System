@@ -4,14 +4,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.bo.custom.OrderBo;
+import org.example.controller.PlaceOrderFormController;
 import org.example.dao.DaoFactory;
 import org.example.dao.custom.impl.OrderDaoImpl;
 import org.example.dto.Order;
 import org.example.entity.OrderEntity;
 import org.example.util.DaoType;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.File;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class OrderBoImpl implements OrderBo {
-    private OrderDaoImpl orderDao= DaoFactory.getInstance().getDao(DaoType.ORDER);
+    private final OrderDaoImpl orderDao= DaoFactory.getInstance().getDao(DaoType.ORDER);
 
     public boolean save(Order order){
         return orderDao.save(new ObjectMapper().convertValue(order, OrderEntity.class));
@@ -45,5 +56,55 @@ public class OrderBoImpl implements OrderBo {
     public Order getOrder(String id) {
         OrderEntity orderEntity = orderDao.search(id);
         return new ObjectMapper().convertValue(orderEntity,Order.class);
+    }
+    public void sendEmail(String receiveEmail,String text,File file) throws MessagingException {
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        String myEmail = "nemsithbaduge215@gmail.com";
+        String password ="viuvuhgyogrrrnah";
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(myEmail, password);
+            }
+        });
+
+        Message message = prepareMessage(session, myEmail, receiveEmail, text, file);
+        Transport.send(message);
+    }
+    public Message prepareMessage(Session session, String myEmail, String receiveEmail, String text, File file) {
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myEmail));
+            message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{
+                    new InternetAddress(receiveEmail)
+            });
+            message.setSubject("Order Confirmation & Receipt");
+            message.setText(text);
+
+
+            Multipart multipart = new MimeMultipart();
+
+            MimeBodyPart textPart = new MimeBodyPart();
+            textPart.setText(text);
+            multipart.addBodyPart(textPart);
+
+            MimeBodyPart attachmentPart = new MimeBodyPart();
+            attachmentPart.attachFile(file);
+            multipart.addBodyPart(attachmentPart);
+
+            message.setContent(multipart);
+
+            return message;
+        } catch (Exception e) {
+            Logger.getLogger(PlaceOrderFormController.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
     }
 }

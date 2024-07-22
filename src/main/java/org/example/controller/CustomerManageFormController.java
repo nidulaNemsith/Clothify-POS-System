@@ -22,22 +22,26 @@ import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerManageFormController implements Initializable {
-    public JFXButton btnExit;
-    public JFXButton btnAdd;
-    public JFXComboBox optCustomer;
-    public TextField txtCustomer;
-    public TextField txtName;
-    public TextField txtPhoneNumber;
-    public TextField txtEmail;
-    public TextField txtAddress;
+
+    @FXML
+    private JFXButton btnAdd;
+    @FXML
+    private JFXButton btnBack;
+    @FXML
+    private JFXButton btnDelete;
+    @FXML
+    private JFXButton btnExit;
+    @FXML
+    private JFXButton btnUpdate;
     @FXML
     private TableColumn<?, ?> colAddress;
     @FXML
-    private TableColumn<?, ?> colCustId;
+    private TableColumn<?, ?> colCustomerId;
     @FXML
     private TableColumn<?, ?> colEmail;
     @FXML
@@ -45,14 +49,23 @@ public class CustomerManageFormController implements Initializable {
     @FXML
     private TableColumn<?, ?> colPhoneNumber;
     @FXML
+    private JFXComboBox<String> optCustomer;
+    @FXML
     private TableView<Customer> tblCustomer;
-    public JFXButton btnUpdate;
-    public JFXButton btnDelete;
-    public JFXButton btnBack;
+    @FXML
+    private TextField txtAddress;
+    @FXML
+    private TextField txtCustomer;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtName;
+    @FXML
+    private TextField txtPhoneNumber;
     CustomerBoImpl customerBoImpl=BoFactory.getInstance().getBo(BoType.CUSTOMER);
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colCustId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -142,33 +155,54 @@ public class CustomerManageFormController implements Initializable {
                     "Form Incomplete",
                     "Fill in the empty fields..!!"
             );
-        }else{
-            Customer customer=new Customer(
-                    txtCustomer.getText(),
-                    txtName.getText(),
-                    txtPhoneNumber.getText(),
-                    txtEmail.getText(),
-                    txtAddress.getText()
-            );
-            if(customerBoImpl.save(customer)){
-                showAlert(
-                        Alert.AlertType.INFORMATION,
-                        "Customer Added",
-                        "Success",
-                        "Customer Added Successfully..!!"
-                );
-                formClear();
-                txtCustomer.setText(customerBoImpl.generateId());
-            }else{
-                showAlert(
-                        Alert.AlertType.ERROR,
-                        "Customer Add Failed",
-                        "Error Adding Customer",
-                        "An error occurred while trying to add the customer. Please try again."
-                );
-            }
-            tblCustomer.setItems(customerBoImpl.getAll());
+            return;
         }
+        if (isExistEmailAndPhoneNumber()){
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Customer Already Exists",
+                    "Duplicate Entry",
+                    "A customer with this email or phone number already exists. " +
+                            "Please use a different email or phone number."
+            );
+            return;
+        }
+        if (!customerBoImpl.isValidEmail(txtEmail.getText())){
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "ERROR",
+                    "Invalid Email",
+                    "Please enter a valid email."
+            );
+            txtEmail.setText(null);
+            return;
+        }
+        Customer customer=new Customer(
+                txtCustomer.getText(),
+                txtName.getText(),
+                txtPhoneNumber.getText(),
+                txtEmail.getText(),
+                txtAddress.getText()
+        );
+        if(customerBoImpl.save(customer)){
+            showAlert(
+                    Alert.AlertType.INFORMATION,
+                    "Customer Added",
+                    "Success",
+                    "Customer Added Successfully..!!"
+            );
+            formClear();
+            txtCustomer.setText(customerBoImpl.generateId());
+        }else{
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Customer Add Failed",
+                    "Error Adding Customer",
+                    "An error occurred while trying to add the customer. Please try again."
+            );
+        }
+            tblCustomer.setItems(customerBoImpl.getAll());
+
     }
     public void optCustomerOnAction(ActionEvent actionEvent) {
         Object value = optCustomer.getValue();
@@ -198,16 +232,18 @@ public class CustomerManageFormController implements Initializable {
             btnDelete.setDisable(true);
         }
     }
+    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
+        String role = CurrentLogInUserController.getInstance().getRole();
+
+        switch (role){
+            case "Admin":loadAdminPage(actionEvent);break;
+            case "Staff":loadStaffPage(actionEvent);break;
+            default:break;
+        }
+    }
     private void setComboBoxValues(){
         ObservableList<String> option= FXCollections.observableArrayList("Add Customer","Update Customer","Delete Customer");
         optCustomer.setItems(option);
-    }
-    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/dashBoard-admin.fxml"));
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
     private void optAdd(){
         btnDelete.setVisible(false);
@@ -259,6 +295,24 @@ public class CustomerManageFormController implements Initializable {
         alert.setHeaderText(header);
         alert.setContentText(content);
         return alert.showAndWait();
+    }
+    private void loadAdminPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/dashBoard-admin.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    private void loadStaffPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/dashBoard-staff.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    private boolean isExistEmailAndPhoneNumber(){
+        return customerBoImpl.getCustomerByEmail(txtEmail.getText())!=null ||
+                customerBoImpl.getCustomerByEmail(txtPhoneNumber.getText())!=null;
     }
 
 }

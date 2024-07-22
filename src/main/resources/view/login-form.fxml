@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -34,15 +35,15 @@
                   <Font name="Cambria" size="13.0" />
                </font>
             </JFXButton>
-            <TextField fx:id="txtPassword" focusTraversable="false" layoutX="101.0" layoutY="209.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Password" style="-fx-background-color: #777979;" />
             <Label layoutX="101.0" layoutY="185.0" prefHeight="24.0" prefWidth="83.0" text="Password" textFill="#fffefe">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <JFXButton fx:id="btnForgotPassword" layoutX="228.0" layoutY="246.0" onAction="#btnforgotPasswordOnAction" prefHeight="30.0" prefWidth="129.0" text="Forgot Password?" textFill="#fac1d9">
+            <JFXButton fx:id="btnForgotPassword" layoutX="228.0" layoutY="246.0" onAction="#btnForgotPasswordOnAction" prefHeight="30.0" prefWidth="129.0" text="Forgot Password?" textFill="#fac1d9">
                <font>
                   <Font size="14.0" />
                </font></JFXButton>
+            <PasswordField fx:id="txtPassword" layoutX="101.0" layoutY="209.0" prefHeight="38.0" prefWidth="246.0" promptText="Enter Password" style="-fx-background-color: #777979;" />
          </children>
       </AnchorPane>
       <JFXButton fx:id="btnExit" layoutX="925.0" layoutY="14.0" onAction="#btnExitOnAction" prefHeight="32.0" prefWidth="48.0" style="-fx-background-color: #111315;" text="X" textFill="#e81717">
