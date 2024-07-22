@@ -2,6 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -110,6 +113,16 @@
          </effect>
       </JFXButton>
       <Separator layoutX="814.0" layoutY="84.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="0.0" />
-      <PieChart layoutX="501.0" layoutY="174.0" prefHeight="412.0" prefWidth="449.0" style="-fx-background-color: white;" />
+      <PieChart fx:id="mostSellProductChart" layoutX="428.0" layoutY="143.0" prefHeight="234.0" prefWidth="362.0" style="-fx-background-color: white; -fx-background-radius: 20;" title="Most Sell Products" />
+      <Separator layoutX="207.0" layoutY="147.0" orientation="VERTICAL" prefHeight="479.0" prefWidth="6.0" />
+      <BarChart fx:id="topOrders" layoutX="294.0" layoutY="399.0" prefHeight="234.0" prefWidth="632.0" style="-fx-background-color: white; -fx-background-radius: 20;" title="Top Orders">
+        <xAxis>
+          <CategoryAxis fx:id="customerAxis" label="Customer ID" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="amount" label="Amount" prefHeight="148.0" prefWidth="73.0" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Separator layoutX="221.0" layoutY="385.0" prefHeight="3.0" prefWidth="752.0" />
    </children>
 </AnchorPane>

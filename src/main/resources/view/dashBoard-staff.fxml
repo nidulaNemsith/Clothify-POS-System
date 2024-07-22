@@ -2,6 +2,10 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.Bloom?>
@@ -17,7 +21,7 @@
             <Font name="Candara Bold" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="lblTime" layoutX="640.0" layoutY="74.0" prefHeight="47.0" prefWidth="166.0" text="23:00" textFill="#fac1d9">
+      <Label fx:id="lblTime" layoutX="640.0" layoutY="74.0" prefHeight="47.0" prefWidth="166.0" text="23:00:00" textFill="#fac1d9">
          <font>
             <Font name="Calibri Bold" size="30.0" />
          </font>
@@ -98,5 +102,16 @@
          </cursor>
       </JFXButton>
       <Separator layoutX="813.0" layoutY="84.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="0.0" />
+      <PieChart fx:id="mostSellProductChart" layoutX="416.0" layoutY="133.0" prefHeight="250.0" prefWidth="362.0" style="-fx-background-color: white; -fx-background-radius: 20;" title="Most Sell Products" />
+      <BarChart fx:id="topOrders" layoutX="281.0" layoutY="402.0" prefHeight="238.0" prefWidth="632.0" style="-fx-background-color: white; -fx-background-radius: 20;" title="Top Orders">
+         <xAxis>
+            <CategoryAxis fx:id="customerAxis" label="Customer ID" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis fx:id="amount" label="Amount" prefHeight="152.0" prefWidth="78.0" side="LEFT" />
+         </yAxis>
+      </BarChart>
+      <Separator layoutX="221.0" layoutY="394.0" prefHeight="3.0" prefWidth="752.0" />
+      <Separator layoutX="207.0" layoutY="145.0" orientation="VERTICAL" prefHeight="501.0" prefWidth="6.0" />
    </children>
 </AnchorPane>

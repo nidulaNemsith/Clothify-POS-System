@@ -3,17 +3,23 @@ package org.example.bo.custom.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import org.example.bo.custom.OrderDetailBo;
 import org.example.dao.DaoFactory;
 import org.example.dao.custom.impl.OrderDetailDaoImpl;
+import org.example.dao.custom.impl.ProductDaoImpl;
 import org.example.dto.OrderHasItem;
 import org.example.dto.Product;
 import org.example.entity.OrderHasItemEntity;
 import org.example.util.DaoType;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDetailBoImpl implements OrderDetailBo {
     private OrderDetailDaoImpl orderDetailDao= DaoFactory.getInstance().getDao(DaoType.ORDER_DETAIL);
+    private ProductDaoImpl productDao= DaoFactory.getInstance().getDao(DaoType.PRODUCT);
 
     public String generateId(){
         if (orderDetailDao.getLastId()==null){
@@ -52,6 +58,23 @@ public class OrderDetailBoImpl implements OrderDetailBo {
             observableArrayList.add(new ObjectMapper().convertValue(orderHasItemEntity,OrderHasItem.class));
         });
         return observableArrayList;
+    }
+    public ObservableList<PieChart.Data> getMostSoldProducts() {
+        ObservableList<OrderHasItem> allOrders = getAll();
+        Map<String, Integer> productSales = new HashMap<>();
+
+        allOrders.forEach(orderItem -> {
+            String productName = productDao.search(orderItem.getProductId()).getName();
+            int quantity = orderItem.getQty();
+            productSales.put(productName, productSales.getOrDefault(productName, 0) + quantity);
+        });
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        productSales.forEach((product, quantity) -> {
+            pieChartData.add(new PieChart.Data(product, quantity));
+        });
+
+        return pieChartData;
     }
 
     public ObservableList<OrderHasItem> getAllByOrderId(String orderId){

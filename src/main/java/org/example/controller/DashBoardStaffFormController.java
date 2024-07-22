@@ -4,17 +4,26 @@ import com.jfoenix.controls.JFXButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.bo.BoFactory;
+import org.example.bo.custom.impl.OrderBoImpl;
+import org.example.bo.custom.impl.OrderDetailBoImpl;
+import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,11 +45,24 @@ public class DashBoardStaffFormController implements Initializable {
     public JFXButton btnReport;
     public Label lblName;
     public JFXButton btnLogOut;
+    @FXML
+    private PieChart mostSellProductChart;
+    @FXML
+    private BarChart<String,Number> topOrders;
+
+    private final OrderDetailBoImpl orderDetailBo= BoFactory.getInstance().getBo(BoType.ORDER_DETAIL);
+    private final OrderBoImpl orderBo= BoFactory.getInstance().getBo(BoType.ORDER);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblName.setText(CurrentLogInUserController.getInstance().getName());
         loadDateAndTime();
+
+        XYChart.Series<String, Number> topOrdersSeries = orderBo.getTopOrdersSeries(10);
+        topOrders.getData().add(topOrdersSeries);
+
+        ObservableList<PieChart.Data> mostSoldProducts = orderDetailBo.getMostSoldProducts();
+        mostSellProductChart.setData(mostSoldProducts);
     }
     public void btnLogOutOnAction(ActionEvent actionEvent) throws IOException {
         Optional<ButtonType> buttonType = showAlert(

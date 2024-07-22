@@ -3,6 +3,7 @@ package org.example.bo.custom.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.XYChart;
 import org.example.bo.custom.OrderBo;
 import org.example.controller.PlaceOrderFormController;
 import org.example.dao.DaoFactory;
@@ -17,9 +18,12 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class OrderBoImpl implements OrderBo {
     private final OrderDaoImpl orderDao= DaoFactory.getInstance().getDao(DaoType.ORDER);
@@ -45,6 +49,23 @@ public class OrderBoImpl implements OrderBo {
             orderObservableList.add(new ObjectMapper().convertValue(orderEntity,Order.class));
         });
         return orderObservableList;
+    }
+    public ObservableList<Order> getTopOrders(int limit) {
+        ObservableList<Order> allOrders = getAll();
+        List<Order> sortedOrders = allOrders.stream()
+                .sorted(Comparator.comparing(Order::getTotal).reversed())
+                .limit(limit)
+                .collect(Collectors.toList());
+        return FXCollections.observableArrayList(sortedOrders);
+    }
+
+    public XYChart.Series<String, Number> getTopOrdersSeries(int limit) {
+        ObservableList<Order> topOrders = getTopOrders(limit);
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        topOrders.forEach(order -> {
+            series.getData().add(new XYChart.Data<>(order.getOrderId(), order.getTotal()));
+        });
+        return series;
     }
     public boolean update(Order order){
         return orderDao.update(new ObjectMapper().convertValue(order, OrderEntity.class));
