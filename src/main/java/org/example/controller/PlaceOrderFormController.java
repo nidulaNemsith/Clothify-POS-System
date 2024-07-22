@@ -133,6 +133,10 @@ public class PlaceOrderFormController implements Initializable {
 
     }
     public void btnAddOnAction(ActionEvent actionEvent) throws JRException, MessagingException {
+        String customerName=customerBo.getCustomer(optCustomerId.getValue()).getName();
+        String mailBody="Dear "+customerName+",\n" +
+                "\n" +
+                "Thank you for your purchase! Please find your order details below:";
 
         if (isAnyEmptyFieldForPlace()){
             showAlert(
@@ -143,7 +147,6 @@ public class PlaceOrderFormController implements Initializable {
             );
             return;
         }
-        generateOrderReceipt();
 
         Order order = new Order(
                 txtOrder.getText(),
@@ -161,6 +164,7 @@ public class PlaceOrderFormController implements Initializable {
                     "Success",
                     "Order Placed Successfully..!!"
             );
+            generateOrderReceipt(mailBody);
             orderIdF=txtOrder.getText();
         }else{
             showAlert(
@@ -172,8 +176,13 @@ public class PlaceOrderFormController implements Initializable {
         }
         finalizeOrder();
     }
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    public void btnUpdateOnAction(ActionEvent actionEvent) throws JRException, MessagingException {
         Order order = orderBo.getOrder(txtOrder.getText());
+        String customerName=customerBo.getCustomer(optCustomerId.getValue()).getName();
+
+        String mailBody="Dear " + customerName + ",\n\n" +
+                "Thank you for your purchase! Your order has been updated.\n" +
+                "Please find your updated order details below:\n\n";
 
         if (txtOrder.getText().isEmpty() || txtOrder.getText()==null){
             showAlert(
@@ -203,6 +212,7 @@ public class PlaceOrderFormController implements Initializable {
                     "Update Status",
                     "Order Updated Successfully...!!"
             );
+            generateOrderReceipt(mailBody);
         }else{
             showAlert(
                     Alert.AlertType.ERROR,
@@ -444,15 +454,13 @@ public class PlaceOrderFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR,"Report Not Found..!!!").show();
         }
     }
-    private void generateOrderReceipt() throws JRException, MessagingException {
+    private void generateOrderReceipt(String mailBody) throws JRException, MessagingException {
 
         Customer customer = customerBo.getCustomer(optCustomerId.getValue());
 
         String path = "E:\\clothify-pos\\src\\main\\resources\\report\\Order_Invoice.jrxml";
         String savePath = "E:\\clothify-pos\\src\\main\\resources\\reportPdf\\orderReport\\" + txtOrder.getText() + ".pdf";
-        String mailBody="Dear "+customer.getName()+",\n" +
-                "\n" +
-                "Thank you for your purchase! Please find your order details below:";
+
 
         Map<String, Object> parameters = new HashMap<>();
         JasperReport report = JasperCompileManager.compileReport(path);
